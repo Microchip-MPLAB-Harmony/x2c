@@ -1,0 +1,1 @@
+    X2CScope_Init();

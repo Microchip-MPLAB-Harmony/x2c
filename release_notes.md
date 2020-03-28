@@ -3,16 +3,14 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
-## X2C Release v1.0
+## X2C Release v3.0.0
 ### New Features
+This release enables X2CScope plugin support for MPLAB® Harmony 3 application on following MCU families
 
-- **New part support** - This release introduces initial support for <fill me>.
-
-- **Development kit and demo application support** - The following table provides number of peripheral library application available for different development kits
-
-    | Development Kits                                                                                                                               | Number of applications |
-    | ---                                                                                                                                            | --- |
-    | [SAM D21 Xplained Pro Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=ATSAMD21-XPRO)                     | 8 |
+- SAM C2x, SAM D2x, SAMLx
+- SAM D5x, SAM E5x
+- SAM E7x, SAM V7x, SAM S7x
+- PIC32MK, PIC32MX, PIC32MZ
 
 
 
@@ -20,12 +18,12 @@
 
 The current known issues are as follows:
 
-* <fill me> 
+* None
 
 ### Development Tools
 
-* [MPLAB® X IDE v5.20](https://www.microchip.com/mplab/mplab-x-ide)
-* [MPLAB® XC32 C/C++ Compiler v2.20](https://www.microchip.com/mplab/compilers)
-* [IAR Embedded Workbench® for ARM® (v8.32 or above)](https://www.iar.com/iar-embedded-workbench/#!?architecture=Arm)
+* [MPLAB® X IDE v5.35](https://www.microchip.com/mplab/mplab-x-ide)
+* [MPLAB® XC32 C/C++ Compiler v2.40](https://www.microchip.com/mplab/compilers)
 * MPLAB® X IDE plug-ins:
     * MPLAB® Harmony Configurator (MHC) v3.3.0.0 and above.
+    * X2CScope v1.3.0 Plugin
