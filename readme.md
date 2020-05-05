@@ -1,9 +1,11 @@
-﻿![Microchip logo](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_logo.png)
-![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
+﻿---
+title: Harmony 3 X2C Package
+nav_order: 1
+---
 
 # MPLAB® Harmony 3 X2C
 
-MPLAB® Harmony 3 is an extension of the MPLAB® ecosystem for creating
+MPLAB® Harmony 3 is an extension of the MPLAB ecosystem for creating
 embedded firmware solutions for Microchip 32-bit SAM and PIC® microcontroller
 and microprocessor devices.  Refer to the following links for more information.
 
@@ -13,22 +15,19 @@ and microprocessor devices.  Refer to the following links for more information.
 - [Microchip MPLAB® Harmony](https://www.microchip.com/mplab/mplab-harmony)
 - [Microchip MPLAB® Harmony Pages](https://microchip-mplab-harmony.github.io/)
 
-This repository contains the MPLAB® Harmony 3 X2C solutions and example applications.
+This repository contains the MPLAB Harmony 3 X2C solutions and example applications. Refer to the following links for release notes, training materials, and interface reference information.
 
-- [Release Notes](./release_notes.md)
+- [Release Notes](release_notes.md)
 - [MPLAB® Harmony License](mplab_harmony_license.md)
 - [X2CScope License](X2CScope_license.md)
 - [MPLAB® Harmony 3 X2C Wiki](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki)
-- [MPLAB® Harmony 3 X2C API Help](https://microchip-mplab-harmony.github.io/x2c)
+- [Learn how to add X2CScope to your MPLAB Harmony Application](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki/add_x2cScope_to_your_application)
 
 # Contents Summary
 
 | Folder     | Description                                               |
 | ---        | ---                                                       |
-| apps/x2c-scope | Example applications for X2C library components      |
-| x2c-scope/config     | X2C module configuration file                        |
-| docs       | X2C library help documentation                       |
-
+| config     | X2C module configuration file                             |
 
 
 ____
@@ -48,5 +47,3 @@ ____
 
 [![](https://img.shields.io/github/stars/Microchip-MPLAB-Harmony/x2c.svg?style=social)]()
 [![](https://img.shields.io/github/watchers/Microchip-MPLAB-Harmony/x2c.svg?style=social)]()
-
-

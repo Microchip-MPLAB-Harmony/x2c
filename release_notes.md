@@ -3,7 +3,7 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
-## X2C Release v3.0.0
+## X2C Release v1.0.0
 ### New Features
 This release enables X2CScope plugin support for MPLAB® Harmony 3 application on following MCU families
 
@@ -18,7 +18,7 @@ This release enables X2CScope plugin support for MPLAB® Harmony 3 application o
 
 The current known issues are as follows:
 
-* None
+* "Double" data type (double precision floating point) variables are not supported in "Watch View" of X2CScope v1.3.0 plug-in
 
 ### Development Tools
 
