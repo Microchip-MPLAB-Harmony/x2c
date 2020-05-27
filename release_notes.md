@@ -22,8 +22,8 @@ The current known issues are as follows:
 
 ### Development Tools
 
-* [MPLAB® X IDE v5.35](https://www.microchip.com/mplab/mplab-x-ide)
-* [MPLAB® XC32 C/C++ Compiler v2.40](https://www.microchip.com/mplab/compilers)
+* [MPLAB® X IDE v5.40](https://www.microchip.com/mplab/mplab-x-ide)
+* [MPLAB® XC32 C/C++ Compiler v2.41](https://www.microchip.com/mplab/compilers)
 * MPLAB® X IDE plug-ins:
-    * MPLAB® Harmony Configurator (MHC) v3.3.0.0 and above.
+    * MPLAB® Harmony Configurator (MHC) v3.5.0 and above.
     * X2CScope v1.3.0 Plugin

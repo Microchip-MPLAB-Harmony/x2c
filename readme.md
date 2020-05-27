@@ -1,8 +1,4 @@
-﻿---
-title: Harmony 3 X2C Package
-nav_order: 1
----
-
+﻿
 # MPLAB® Harmony 3 X2C
 
 MPLAB® Harmony 3 is an extension of the MPLAB ecosystem for creating
