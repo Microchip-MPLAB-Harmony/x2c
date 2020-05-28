@@ -15,7 +15,7 @@ This repository contains the MPLAB Harmony 3 X2C solutions and example applicati
 
 - [Release Notes](release_notes.md)
 - [MPLAB® Harmony License](mplab_harmony_license.md)
-- [X2CScope License](X2CScope_license.md)
+- [X2CScope License](x2c_scope_license.md)
 - [MPLAB® Harmony 3 X2C Wiki](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki)
 - [Learn how to add X2CScope to your MPLAB Harmony Application](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki/add_x2cScope_to_your_application)
 
