@@ -1,4 +1,11 @@
-﻿
+﻿---
+title: MPLAB® Harmony X2C
+has_children: true
+has_toc: false
+nav_order: 1
+
+---
+
 # MPLAB® Harmony 3 X2C
 
 MPLAB® Harmony 3 is an extension of the MPLAB ecosystem for creating
@@ -11,19 +18,24 @@ and microprocessor devices.  Refer to the following links for more information.
 - [Microchip MPLAB® Harmony](https://www.microchip.com/mplab/mplab-harmony)
 - [Microchip MPLAB® Harmony Pages](https://microchip-mplab-harmony.github.io/)
 
-This repository contains the MPLAB Harmony 3 X2C solutions and example applications. Refer to the following links for release notes, training materials, and interface reference information.
+This repository contains the MPLAB Harmony 3 X2C solutions which includes support for X2CScope and model based development using Scilab/Xcos + X2C Library. Refer to the following links for release notes, training materials, and interface reference information.
 
 - [Release Notes](release_notes.md)
 - [MPLAB® Harmony License](mplab_harmony_license.md)
 - [X2CScope License](x2c_scope_license.md)
+- [Learn more about installing MPLAB Harmony X2C Remote Package](installing_mh_x2c.md)
+- [Learn more about X2CScope support in MPLAB Harmony](x2c-scope/docs/readme.md)
+- [Learn more about X2C Model support in MPLAB Harmony](x2c-model/docs/readme.md)
 - [MPLAB® Harmony 3 X2C Wiki](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki)
-- [Learn how to add X2CScope to your MPLAB Harmony Application](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki/add_x2cScope_to_your_application)
+
 
 # Contents Summary
 
 | Folder     | Description                                               |
 | ---        | ---                                                       |
-| config     | X2C module configuration file                             |
+| x2c-scope/config | X2CScope module configuration file                  |
+| x2c-model/config | X2C Model module configuration file                  |
+
 
 
 ____
