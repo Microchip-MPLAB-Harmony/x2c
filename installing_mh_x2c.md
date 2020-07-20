@@ -10,7 +10,7 @@ nav_order: 2
 
 ## Pre-requisites
  - [MPLAB X IDE v5.40 or above](https://www.microchip.com/mplab/mplab-x-ide)
- - [XC32 v2.40 or above](https://www.microchip.com/mplab/compilers)
+ - [XC32 v2.41 or above](https://www.microchip.com/mplab/compilers)
  - [Install MPLAB Harmony Configurator Plugin in MPLAB X](https://github.com/Microchip-MPLAB-Harmony/mhc/wiki#installing-mplab-harmony-configurator-from-the-microchip-plugins-update-center) 
  
 ## Install/update the latest revision of MPLAB Harmony X2C Remote Package

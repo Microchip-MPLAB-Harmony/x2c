@@ -114,8 +114,8 @@ This section provides a step by step guide to create an X2C Model based "Bliky L
     
     
 - Add X2C Communicator API calls to MPLAB Harmony 3 Project
-    - Add X2C_Communicate() API in while(1) loop in main.c
-    - Add X2C_UpdateModel() API as a call back to TC0 period match interrupt
+    - Add `X2C_Communicate()` API in while(1) loop in main.c
+    - Add `X2C_UpdateModel()` API as a call back to TC0 period match interrupt
     - Start TC0 Timer
     ![](images/add_x2c_communicator_api.gif)
     <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> 
@@ -166,30 +166,21 @@ This section provides a step by step guide to create an X2C Model based "Bliky L
     ```
     void readInports(void)
     {
-	/* TODO add linkage hardware-inputs -> X2C inports here 
-     * Pass the peripheral values to model Inports
-     * if (PORTA & 1) { 
-     *    x2cModel.inports.bInport = INT16_MAX;
-     * }else {
-     *    x2cModel.inports.bInport = 0;
-     * }
-	 */
-        if((*x2cModel.outports.bLED_D2))
+        /* TODO add linkage hardware-inputs -> X2C inports here 
+         * Pass the peripheral values to model Inports
+         * if (PORTA & 1) { 
+         *    x2cModel.inports.bInport = INT16_MAX;
+         * }else {
+         *    x2cModel.inports.bInport = 0;
+         * }
+         */
+        if(BTN_S2_Get())
         {
-            LED_D2_Set();
+            x2cModel.inports.bBTN_S2 = 0;
         }
         else
         {
-            LED_D2_Clear();
-        }
-        
-        if((*x2cModel.outports.bLED_D17))
-        {
-            LED_D17_Set();
-        }
-        else
-        {
-            LED_D17_Clear();
+            x2cModel.inports.bBTN_S2 = 1;
         }
     }
     ```

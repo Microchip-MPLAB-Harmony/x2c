@@ -11,14 +11,15 @@ nav_order: 2
 
 ## Pre-requisites
  - [MPLAB® X IDE v5.40 or above](https://www.microchip.com/mplab/mplab-x-ide)
- - [XC32 v2.40 or above](https://www.microchip.com/mplab/compilers)
+ - [XC32 v2.41 or above](https://www.microchip.com/mplab/compilers)
  - [MPLAB Harmony Configurator Plugin in MPLAB X](https://github.com/Microchip-MPLAB-Harmony/mhc/wiki#installing-mplab-harmony-configurator-from-the-microchip-plugins-update-center)
+ - [Scilab v5.5.2](https://www.scilab.org/download/5.5.2)
  - [MPLAB Harmony X2C Remote Package](../../installing_mh_x2c.md) 
  
 ## Install X2C Library
 
  - Visit this [link](https://x2c.lcm.at/downloads/) to download X2C v6.3 or above. 
- - If X2C v6.3 or above is not yet availabe, download X2C v6.2.1969 or above under "Archive -> Nightly Builds"
+ - If X2C v6.3 or above is not yet availabe, download X2C v6.2.1969 or above under "Nightly Builds"
  
     ![](images/selecting_x2c_installer.png)
     
