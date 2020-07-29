@@ -305,7 +305,7 @@ def instantiateComponent(x2cModelcomponent):
 #Include Library Files    
 
     x2cScope_MainSourceFile = x2cModelcomponent.createFileSymbol("X2C_SCOPE_MAIN_C", None)
-    x2cScope_MainSourceFile.setSourcePath("/x2c_installer_files/Library/General/Controller/src/Scope_Main.c")
+    x2cScope_MainSourceFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/src/Scope_Main.c")
     x2cScope_MainSourceFile.setOutputName("Scope_Main.c")
     x2cScope_MainSourceFile.setDestPath("/X2CCode/X2CModel/")
     x2cScope_MainSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/")
@@ -314,127 +314,127 @@ def instantiateComponent(x2cModelcomponent):
     
     if( ("SAME7" in Variables.get("__PROCESSOR")) or ("SAMS7" in Variables.get("__PROCESSOR")) or ("SAMV7" in Variables.get("__PROCESSOR"))):
         x2cGeneralLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_GENERAL_LIB_SAME70_A", None)
-        x2cGeneralLibraryFile.setSourcePath("/x2c_installer_files/Library/General/Controller/lib/libCortexM7-ATSAM_General.a")
+        x2cGeneralLibraryFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/lib/libCortexM7-ATSAM_General.a")
         x2cGeneralLibraryFile.setOutputName("libCortexM7-ATSAM_General.a")
         x2cGeneralLibraryFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/lib/")
         
         x2cControlLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_CONTROL_LIB_SAME70_A", None)
-        x2cControlLibraryFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/lib/libCortexM7-ATSAM_Control.a")
+        x2cControlLibraryFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/lib/libCortexM7-ATSAM_Control.a")
         x2cControlLibraryFile.setOutputName("libCortexM7-ATSAM_Control.a")
         x2cControlLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/lib/")
 
         x2cMathLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MATH_LIB_SAME70_A", None)
-        x2cMathLibraryFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/lib/libCortexM7-ATSAM_Math.a")
+        x2cMathLibraryFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/lib/libCortexM7-ATSAM_Math.a")
         x2cMathLibraryFile.setOutputName("libCortexM7-ATSAM_Math.a")
         x2cMathLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/lib/")
         
         x2cMCHPLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MCHP_LIB_SAME70_A", None)
-        x2cMCHPLibraryFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/lib/libCortexM7-ATSAM_MCHP.a")
+        x2cMCHPLibraryFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/lib/libCortexM7-ATSAM_MCHP.a")
         x2cMCHPLibraryFile.setOutputName("libCortexM7-ATSAM_MCHP.a")
         x2cMCHPLibraryFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/lib/")
     
     elif( ("PIC32CM" in Variables.get("__PROCESSOR")) or ("SAMD2" in Variables.get("__PROCESSOR")) or ("SAMC2" in Variables.get("__PROCESSOR")) or ("SAML2" in Variables.get("__PROCESSOR"))):
         x2cGeneralLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_GENERAL_LIB_SAMC21_A", None)
-        x2cGeneralLibraryFile.setSourcePath("/x2c_installer_files/Library/General/Controller/lib/libCortexM0Plus-ATSAM_General.a")
+        x2cGeneralLibraryFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/lib/libCortexM0Plus-ATSAM_General.a")
         x2cGeneralLibraryFile.setOutputName("libCortexM0Plus-ATSAM_General.a")
         x2cGeneralLibraryFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/lib/")
         
         x2cControlLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_CONTROL_LIB_SAMC21_A", None)
-        x2cControlLibraryFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/lib/libCortexM0Plus-ATSAM_Control.a")
+        x2cControlLibraryFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/lib/libCortexM0Plus-ATSAM_Control.a")
         x2cControlLibraryFile.setOutputName("libCortexM0Plus-ATSAM_Control.a")
         x2cControlLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/lib/")
 
         x2cMathLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MATH_LIB_SAMC21_A", None)
-        x2cMathLibraryFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/lib/libCortexM0Plus-ATSAM_Math.a")
+        x2cMathLibraryFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/lib/libCortexM0Plus-ATSAM_Math.a")
         x2cMathLibraryFile.setOutputName("libCortexM0Plus-ATSAM_Math.a")
         x2cMathLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/lib/")
         
         x2cMCHPLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MCHP_LIB_SAMC21_A", None)
-        x2cMCHPLibraryFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/lib/libCortexM0Plus-ATSAM_MCHP.a")
+        x2cMCHPLibraryFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/lib/libCortexM0Plus-ATSAM_MCHP.a")
         x2cMCHPLibraryFile.setOutputName("libCortexM0Plus-ATSAM_MCHP.a")
         x2cMCHPLibraryFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/lib/")   
 
     elif( ("SAMD5" in Variables.get("__PROCESSOR")) or ("SAME5" in Variables.get("__PROCESSOR"))):
         x2cGeneralLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_GENERAL_LIB_SAME54_A", None)
-        x2cGeneralLibraryFile.setSourcePath("/x2c_installer_files/Library/General/Controller/lib/libCortexM4-ATSAM_General.a")
+        x2cGeneralLibraryFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/lib/libCortexM4-ATSAM_General.a")
         x2cGeneralLibraryFile.setOutputName("libCortexM4-ATSAM_General.a")
         x2cGeneralLibraryFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/lib/")
         
         x2cControlLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_CONTROL_LIB_SAME54_A", None)
-        x2cControlLibraryFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/lib/libCortexM4-ATSAM_Control.a")
+        x2cControlLibraryFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/lib/libCortexM4-ATSAM_Control.a")
         x2cControlLibraryFile.setOutputName("libCortexM4-ATSAM_Control.a")
         x2cControlLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/lib/")
 
         x2cMathLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MATH_LIB_SAME54_A", None)
-        x2cMathLibraryFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/lib/libCortexM4-ATSAM_Math.a")
+        x2cMathLibraryFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/lib/libCortexM4-ATSAM_Math.a")
         x2cMathLibraryFile.setOutputName("libCortexM4-ATSAM_Math.a")
         x2cMathLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/lib/")
         
         x2cMCHPLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MCHP_LIB_SAME54_A", None)
-        x2cMCHPLibraryFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/lib/libCortexM4-ATSAM_MCHP.a")
+        x2cMCHPLibraryFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/lib/libCortexM4-ATSAM_MCHP.a")
         x2cMCHPLibraryFile.setOutputName("libCortexM4-ATSAM_MCHP.a")
         x2cMCHPLibraryFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/lib/")              
 
     elif("PIC32MX" in Variables.get("__PROCESSOR")):
         x2cGeneralLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_GENERAL_A_PIC32MX_A", None)
-        x2cGeneralLibraryFile.setSourcePath("/x2c_installer_files/Library/General/Controller/lib/libPIC32MX_General.a")
+        x2cGeneralLibraryFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/lib/libPIC32MX_General.a")
         x2cGeneralLibraryFile.setOutputName("libPIC32MX_General.a")
         x2cGeneralLibraryFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/lib/")
         
         x2cControlLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_CONTROL_A_PIC32MX_A", None)
-        x2cControlLibraryFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/lib/libPIC32MX_Control.a")
+        x2cControlLibraryFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/lib/libPIC32MX_Control.a")
         x2cControlLibraryFile.setOutputName("libPIC32MX_Control.a")
         x2cControlLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/lib/")
 
         x2cMathLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MATH_A_PIC32MX_A", None)
-        x2cMathLibraryFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/lib/libPIC32MX_Math.a")
+        x2cMathLibraryFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/lib/libPIC32MX_Math.a")
         x2cMathLibraryFile.setOutputName("libPIC32MX_Math.a")
         x2cMathLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/lib/")
         
         x2cMCHPLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MCHP_A_PIC32MX_A", None)
-        x2cMCHPLibraryFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/lib/libPIC32MX_MCHP.a")
+        x2cMCHPLibraryFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/lib/libPIC32MX_MCHP.a")
         x2cMCHPLibraryFile.setOutputName("libPIC32MX_MCHP.a")
         x2cMCHPLibraryFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/lib/")
 
     elif("PIC32MZ" in Variables.get("__PROCESSOR")):
         x2cGeneralLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_GENERAL_A_PIC32MZ_A", None)
-        x2cGeneralLibraryFile.setSourcePath("/x2c_installer_files/Library/General/Controller/lib/libPIC32MZ_General.a")
+        x2cGeneralLibraryFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/lib/libPIC32MZ_General.a")
         x2cGeneralLibraryFile.setOutputName("libPIC32MZ_General.a")
         x2cGeneralLibraryFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/lib/")
         
         x2cControlLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_CONTROL_A_PIC32MZ_A", None)
-        x2cControlLibraryFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/lib/libPIC32MZ_Control.a")
+        x2cControlLibraryFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/lib/libPIC32MZ_Control.a")
         x2cControlLibraryFile.setOutputName("libPIC32MZ_Control.a")
         x2cControlLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/lib/")
 
         x2cMathLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MATH_A_PIC32MZ_A", None)
-        x2cMathLibraryFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/lib/libPIC32MZ_Math.a")
+        x2cMathLibraryFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/lib/libPIC32MZ_Math.a")
         x2cMathLibraryFile.setOutputName("libPIC32MZ_Math.a")
         x2cMathLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/lib/")
         
         x2cMCHPLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MCHP_A_PIC32MZ_A", None)
-        x2cMCHPLibraryFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/lib/libPIC32MZ_MCHP.a")
+        x2cMCHPLibraryFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/lib/libPIC32MZ_MCHP.a")
         x2cMCHPLibraryFile.setOutputName("libPIC32MZ_MCHP.a")
         x2cMCHPLibraryFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/lib/")    
 
     elif("PIC32MK" in Variables.get("__PROCESSOR")):
         x2cGeneralLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_GENERAL_A_PIC32MK_A", None)
-        x2cGeneralLibraryFile.setSourcePath("/x2c_installer_files/Library/General/Controller/lib/libPIC32MK_General.a")
+        x2cGeneralLibraryFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/lib/libPIC32MK_General.a")
         x2cGeneralLibraryFile.setOutputName("libPIC32MK_General.a")
         x2cGeneralLibraryFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/lib/")
         
         x2cControlLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_CONTROL_A_PIC32MK_A", None)
-        x2cControlLibraryFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/lib/libPIC32MK_Control.a")
+        x2cControlLibraryFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/lib/libPIC32MK_Control.a")
         x2cControlLibraryFile.setOutputName("libPIC32MK_Control.a")
         x2cControlLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/lib/")
 
         x2cMathLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MATH_A_PIC32MK_A", None)
-        x2cMathLibraryFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/lib/libPIC32MK_Math.a")
+        x2cMathLibraryFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/lib/libPIC32MK_Math.a")
         x2cMathLibraryFile.setOutputName("libPIC32MK_Math.a")
         x2cMathLibraryFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/lib/")
         
         x2cMCHPLibraryFile = x2cModelcomponent.createLibrarySymbol("X2C_MCHP_A_PIC32MK_A", None)
-        x2cMCHPLibraryFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/lib/libPIC32MK_MCHP.a")
+        x2cMCHPLibraryFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/lib/libPIC32MK_MCHP.a")
         x2cMCHPLibraryFile.setOutputName("libPIC32MK_MCHP.a")
         x2cMCHPLibraryFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/lib/")           
 
@@ -535,7 +535,7 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
     
     x2cCircularByteBufferSourceFile = x2cModelcomponent.createFileSymbol("X2C_CIRCULARBYTEBUFFER_C", None)
-    x2cCircularByteBufferSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/CircularByteBuffer.c")
+    x2cCircularByteBufferSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/CircularByteBuffer.c")
     x2cCircularByteBufferSourceFile.setOutputName("CircularByteBuffer.c")
     x2cCircularByteBufferSourceFile.setDestPath("/X2CCode/X2CModel/")
     x2cCircularByteBufferSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/")
@@ -543,11 +543,11 @@ def instantiateComponent(x2cModelcomponent):
     x2cCircularByteBufferSourceFile.setMarkup(False)
     x2cCircularByteBufferSourceFile.setEnabled(False)
     
-    for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Controller/Common/"):
+    for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Controller/Common/"):
         for filename in files:
 	#		if (".c" in filename):
 	#			x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-	#			x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/" + filename)
+	#			x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/" + filename)
 	#			x2cSourceFile.setOutputName(filename)
 	#			x2cSourceFile.setDestPath("/X2CCode/Controller/Common/")
 	#			x2cSourceFile.setProjectPath("X2CCode/Controller/Common")
@@ -556,7 +556,7 @@ def instantiateComponent(x2cModelcomponent):
 	#
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Controller/Common/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Controller/Common/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -564,7 +564,7 @@ def instantiateComponent(x2cModelcomponent):
 				x2cHeaderFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_TABLESTRUCT_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/TableStruct.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/TableStruct.c")
 	x2cSourceFile.setOutputName("TableStruct.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -572,7 +572,7 @@ def instantiateComponent(x2cModelcomponent):
 	x2cSourceFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_SQRT_DATA_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/Sqrt_Data.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/Sqrt_Data.c")
 	x2cSourceFile.setOutputName("Sqrt_Data.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -580,7 +580,7 @@ def instantiateComponent(x2cModelcomponent):
 	x2cSourceFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_SIN_DATA_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/Sin_Data.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/Sin_Data.c")
 	x2cSourceFile.setOutputName("Sin_Data.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -588,7 +588,7 @@ def instantiateComponent(x2cModelcomponent):
 	x2cSourceFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_SIN2_DATA_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/Sin2_Data.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/Sin2_Data.c")
 	x2cSourceFile.setOutputName("Sin2_Data.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -596,7 +596,7 @@ def instantiateComponent(x2cModelcomponent):
 	x2cSourceFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_EXP_DATA_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/Exp_Data.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/Exp_Data.c")
 	x2cSourceFile.setOutputName("Exp_Data.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -604,7 +604,7 @@ def instantiateComponent(x2cModelcomponent):
 	x2cSourceFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_COMMONFCTS_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/CommonFcts.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/CommonFcts.c")
 	x2cSourceFile.setOutputName("CommonFcts.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -612,7 +612,7 @@ def instantiateComponent(x2cModelcomponent):
 	x2cSourceFile.setMarkup(False)
 
 	x2cSourceFile = x2cModelcomponent.createFileSymbol("X2C_ATAN_DATA_C", None)
-	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Common/Atan_Data.c")
+	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Common/Atan_Data.c")
 	x2cSourceFile.setOutputName("Atan_Data.c")
 	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Common/")
 	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Common/")
@@ -621,11 +621,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Controller/CRC/
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Controller/CRC/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Controller/CRC/"):
 		for filename in files:
 			if (".c" in filename):
 				x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/CRC/" + filename)
+				x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/CRC/" + filename)
 				x2cSourceFile.setOutputName(filename)
 				x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/CRC/")
 				x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel//Controller/CRC/")
@@ -634,7 +634,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Controller/CRC/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Controller/CRC/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Controller/CRC/")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/CRC/")
@@ -644,11 +644,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Controller/Driver/Serial/
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Controller/Driver/Serial/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Controller/Driver/Serial/"):
 		for filename in files:
 			if (".c" in filename):
 				x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Driver/Serial/" + filename)
+				x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Driver/Serial/" + filename)
 				x2cSourceFile.setOutputName(filename)
 				x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Driver/Serial/")
 				x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Driver/Serial")
@@ -657,7 +657,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Controller/Driver/Serial/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Controller/Driver/Serial/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Controller/Driver/Serial")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Driver/Serial")
@@ -667,11 +667,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Controller/Protocol/LNet
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Controller/Protocol/LNet/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Controller/Protocol/LNet/"):
 		for filename in files:
 			if (".c" in filename):
 				x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Protocol/LNet/" + filename)
+				x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Protocol/LNet/" + filename)
 				x2cSourceFile.setOutputName(filename)
 				x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Protocol/LNet/")
 				x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Protocol/LNet")
@@ -680,7 +680,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Controller/Protocol/LNet/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Controller/Protocol/LNet/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Controller/Protocol/LNet")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Protocol/LNet")
@@ -690,11 +690,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Controller/Services
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Controller/Services/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Controller/Services/"):
 		for filename in files:
 			if (".c" in filename):
 				x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Services/" + filename)
+				x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Services/" + filename)
 				x2cSourceFile.setOutputName(filename)
 				x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Services/")
 				x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Services")
@@ -703,7 +703,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Controller/Services/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Controller/Services/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Controller/Services")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Services")
@@ -713,11 +713,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Library/Control/Controller/inc
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Library/Control/Controller/inc/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Library/Control/Controller/inc/"):
 		for filename in files:
 			#if (".c" in filename):
 			#	x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-			#	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Services/" + filename)
+			#	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Services/" + filename)
 			#	x2cSourceFile.setOutputName(filename)
 			#	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Services/")
 			#	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Services")
@@ -726,7 +726,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Library/Control/Controller/inc/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Library/Control/Controller/inc/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Library/Control/Controller/inc")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Library/Control/Controller/inc")
@@ -736,11 +736,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Library/General/Controller/inc
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Library/General/Controller/inc/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Library/General/Controller/inc/"):
 		for filename in files:
 			#if (".c" in filename):
 			#	x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-			#	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Services/" + filename)
+			#	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Services/" + filename)
 			#	x2cSourceFile.setOutputName(filename)
 			#	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Services/")
 			#	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Services")
@@ -749,7 +749,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Library/General/Controller/inc/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Library/General/Controller/inc/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Library/General/Controller/inc")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Library/General/Controller/inc")
@@ -759,11 +759,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Library/Math/Controller/inc
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Library/Math/Controller/inc/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Library/Math/Controller/inc/"):
 		for filename in files:
 			#if (".c" in filename):
 			#	x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-			#	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Services/" + filename)
+			#	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Services/" + filename)
 			#	x2cSourceFile.setOutputName(filename)
 			#	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Services/")
 			#	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Services")
@@ -772,7 +772,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Library/Math/Controller/inc/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Library/Math/Controller/inc/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Library/Math/Controller/inc")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Library/Math/Controller/inc")
@@ -782,11 +782,11 @@ def instantiateComponent(x2cModelcomponent):
 	############################################################################
 	## X2C/Library/Math/Controller/inc
 	############################################################################
-	for root, dirs, files in os.walk(Module.getPath()+"/x2c_installer_files/Library/MCHP/Controller/inc/"):
+	for root, dirs, files in os.walk(Module.getPath()+"../../x2c_installer_files/Library/MCHP/Controller/inc/"):
 		for filename in files:
 			#if (".c" in filename):
 			#	x2cSourceFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-			#	x2cSourceFile.setSourcePath("/x2c_installer_files/Controller/Services/" + filename)
+			#	x2cSourceFile.setSourcePath("../../x2c_installer_files/Controller/Services/" + filename)
 			#	x2cSourceFile.setOutputName(filename)
 			#	x2cSourceFile.setDestPath("/X2CCode/X2CModel/Controller/Services/")
 			#	x2cSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Controller/Services")
@@ -795,7 +795,7 @@ def instantiateComponent(x2cModelcomponent):
 
 			if (".h" in filename):
 				x2cHeaderFile = x2cModelcomponent.createFileSymbol(str(filename), None)
-				x2cHeaderFile.setSourcePath("/x2c_installer_files/Library/MCHP/Controller/inc/" + filename)
+				x2cHeaderFile.setSourcePath("../../x2c_installer_files/Library/MCHP/Controller/inc/" + filename)
 				x2cHeaderFile.setOutputName(filename)
 				x2cHeaderFile.setDestPath("/X2CCode/X2CModel/Library/MCHP/Controller/inc")
 				x2cHeaderFile.setProjectPath("config/"+configName+"/X2CCode/X2CModel/Library/MCHP/Controller/inc")
