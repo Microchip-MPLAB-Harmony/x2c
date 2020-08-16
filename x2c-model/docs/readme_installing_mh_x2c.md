@@ -3,7 +3,7 @@ parent: MPLAB® Harmony X2C
 title: Installing MPLAB Harmony X2C Remote Package
 has_children: false
 has_toc: false
-nav_order: 2
+nav_order: 1
 
 ---
 # Installing MPLAB® Harmony X2C Remote Package
@@ -16,16 +16,16 @@ nav_order: 2
 ## Install/update the latest revision of MPLAB Harmony X2C Remote Package
  - Open MPLAB X IDE
  - Go to Tools > Embedded > MPLAB Harmony Content Manager (MHCM)
-    ![](x2c-model/docs/images/open_mhc_content_manager.png)
+    ![](images/open_mhc_content_manager.png)
  - Set Harmony 3 Installation Path and Installation Source
-    ![](x2c-model/docs/images/set_harmony3_path_mhcm.png)
+    ![](images/set_harmony3_path_mhcm.png)
  - Scroll through the list of remote packages in MPLAB Harmony Content Manager and Select "x2c" and click Download 
-    ![](x2c-model/docs/images/install_x2c_repo.png)
+    ![](images/install_x2c_repo.png)
  - If the required pre-requisite remote packages for "x2c" are not available, then MHCM would prompt you to download the pre-requisite remote packages - Select "OK"
-    ![](x2c-model/docs/images/x2c_dependency_confirmation.png)
+    ![](images/x2c_dependency_confirmation.png)
  - Accept "all" licenses and click "Next"
-    ![](x2c-model/docs/images/mhcm_accept_licenses.png)
+    ![](images/mhcm_accept_licenses.png)
  - If the required pre-requisite remote packages for "x2c" are not available, then MHCM would prompt you to download the pre-requisite remote packages - Select "OK" 
-    ![](x2c-model/docs/images/x2c_dependency_confirmation.png)
+    ![](images/x2c_dependency_confirmation.png)
      
  

@@ -3,7 +3,7 @@ parent: MPLAB® Harmony X2C
 title: X2CScope
 has_children: true
 has_toc: false
-nav_order: 4
+nav_order: 2
 
 market:
   - x2c
@@ -20,8 +20,8 @@ X2C-Scope is a virtual oscilloscope tool developed by Linz Center of Mechatronic
 Using MPLAB Harmony Configurator (MHC), X2CScope can be seamlessly and automatically integrated into any Harmony 3 application. X2C-Scope uses UART to communicate with the target MCU allowing you to watch / update / plot a global variable in real-time.
 
 ## Getting Started with X2CScope
-- [Installing X2CScope Plugin in MPLAB® X IDE](installing_x2cScope.md)
-- [Adding X2CScope to your MPLAB® Harmony Application](add_x2cScope_to_your_application.md)
+- [Installing X2CScope Plugin in MPLAB® X IDE](readme_installing_x2cScope.md)
+- [Adding X2CScope to your MPLAB® Harmony Application](readme_add_x2cScope_to_your_application.md)
 
 
 

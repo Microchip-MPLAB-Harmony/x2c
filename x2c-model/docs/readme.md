@@ -17,7 +17,7 @@ MPLAB Harmony X2C Model enables rapid prototyping or model based development of 
 X2C is an embedded library for model based development of control algorithms developed by Linz Center of Mechatronics. For more information on X2C, please visit their [website](https://x2c.lcm.at/)
 
 ## Getting Started with X2C Model
-- [Installing X2C Library](installing_x2c_library.md)
-- [Create a "Blinky LED" demo using Scilab/Xcos + X2C in MPLAB Harmony 3](create_x2c_model_blinky_led.md)
+- [Installing X2C Library](readme_installing_x2c_library.md)
+- [Create a "Blinky LED" demo using Scilab/Xcos + X2C in MPLAB Harmony 3](readme_create_x2c_model_blinky_led.md)
 
 

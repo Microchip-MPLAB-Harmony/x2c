@@ -23,7 +23,7 @@ This repository contains the MPLAB Harmony 3 X2C solutions which includes suppor
 - [Release Notes](release_notes.md)
 - [MPLAB® Harmony License](mplab_harmony_license.md)
 - [X2CScope License](x2c_scope_license.md)
-- [Learn more about installing MPLAB Harmony X2C Remote Package](installing_mh_x2c.md)
+- [Learn more about installing MPLAB Harmony X2C Remote Package](x2c-model/docs/readme_installing_mh_x2c.md)
 - [Learn more about X2CScope support in MPLAB Harmony](x2c-scope/docs/readme.md)
 - [Learn more about X2C Model support in MPLAB Harmony](x2c-model/docs/readme.md)
 - [MPLAB® Harmony 3 X2C Wiki](https://github.com/Microchip-MPLAB-Harmony/x2c/wiki)

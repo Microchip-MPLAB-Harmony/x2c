@@ -4,7 +4,7 @@ parent: X2C Model
 title: Installing X2C Library
 has_children: false
 has_toc: false
-nav_order: 2
+nav_order: 1
 
 ---
 # Installing X2C Library
@@ -19,9 +19,7 @@ nav_order: 2
 ## Install X2C Library
 
  - Visit this [link](https://x2c.lcm.at/downloads/) to download X2C v6.3 or above. 
- - If X2C v6.3 or above is not yet availabe, download X2C v6.2.1969 or above under "Nightly Builds"
- 
-    ![](images/selecting_x2c_installer.png)
+     ![](images/selecting_x2c_installer.png)
     
     
  - Run the X2C Installer and follow the instructions
@@ -31,7 +29,7 @@ nav_order: 2
     ![](images/components_selection_x2c.png)
     
     
- - Certain library files from X2C are required to be copied to your local MPLAB Harmony 3 X2C installation folder. X2C Installer can do this task, transparent to the user, as long as the user provides the local Harmony 3 installation path as shown below. This step would copy the required library files at <harmony 3 directory>\x2c\config\x2c_installer_files\.
+ - Certain library files from X2C are required to be copied to your local MPLAB Harmony 3 X2C installation folder. X2C Installer can do this task, transparent to the user, as long as the user provides the local Harmony 3 installation path as shown below. This step would copy the required library files at <harmony 3 directory>\x2c_installer_files\.
  
   **NOTE:** This is a important step which adds Scilab/Xcos + X2C model based development support in MPLAB Harmony 3 environment
  

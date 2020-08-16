@@ -3,6 +3,21 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+## X2C Release v1.1.1
+### New Features
+This release includes following updates:
+ - Changed the reference path for x2c_installer_files as per update in X2C v6.3
+ - Added .html files which enables offline access to user documetation
+ - Added prefix of "readme" for every markdown file used in user documentation
+
+### Known Issues
+
+Same as v1.1.0
+
+### Development Tools
+
+Same as v1.1.0
+
 ## X2C Release v1.1.0
 ### New Features
 This release enables  support for model based development using Scilab/Xcos + X2C Library within MPLAB® Harmony 3 embedded software framework environment on following MCU families
