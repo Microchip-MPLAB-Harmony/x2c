@@ -129,7 +129,7 @@ def instantiateComponent(x2cScopecomponent):
         Log.writeInfoMessage("MIPS M14K Device Detected")        
         Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")        
         
-    elif( ("SAMD2" in Variables.get("__PROCESSOR")) or ("SAMC2" in Variables.get("__PROCESSOR")) or ("SAML2" in Variables.get("__PROCESSOR"))):
+    elif(("PIC32CM" in Variables.get("__PROCESSOR")) or ("SAMD2" in Variables.get("__PROCESSOR")) or ("SAMC2" in Variables.get("__PROCESSOR")) or ("SAML2" in Variables.get("__PROCESSOR"))):
         x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_CORTEXM0PLUS_X2C_SCOPE_A", None)
         x2cScopeLibraryFile.setSourcePath("/library/lib/libCORTEXM0PLUS_X2CScope.a")
         x2cScopeLibraryFile.setOutputName("libCORTEXM0PLUS_X2CScope.a")
