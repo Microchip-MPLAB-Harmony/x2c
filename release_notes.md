@@ -3,6 +3,21 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+
+## X2C Release v1.1.2
+### New Features
+This release includes following updates:
+ - Added X2C Scope support for PIC32CM MC 00 Device
+ 
+### Known Issues
+
+Same as v1.1.0
+
+### Development Tools
+
+Same as v1.1.0
+
+
 ## X2C Release v1.1.1
 ### New Features
 This release includes following updates:
