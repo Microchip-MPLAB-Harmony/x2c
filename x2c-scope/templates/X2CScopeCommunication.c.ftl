@@ -39,7 +39,7 @@ void sendSerial(uint8_t data)
     ${X2C_SCOPE_PERIPH_USED}_Write(&data,1);
 }
 
-uint8_t receiveSerial()
+uint8_t receiveSerial(void)
 {
     uint8_t data;
     bool status = false;
@@ -54,13 +54,13 @@ uint8_t receiveSerial()
     }
 }
 
-uint8_t isReceiveDataAvailable()
+uint8_t isReceiveDataAvailable(void)
 {
     return (${X2C_SCOPE_PERIPH_USED}_ReceiverIsReady());
 
 }
 
-uint8_t isSendReady()
+uint8_t isSendReady(void)
 {
     return (${X2C_SCOPE_PERIPH_USED}_TransmitterIsReady());
 }
