@@ -9,4 +9,4 @@ def loadModule():
     #Symbol Name                    Dependency ID     Dependency    Generic Required
     x2cScopecomponent.addDependency("x2cScopeUartDependency", "UART",  False, True )
     
-    x2cScopecomponent.addCapability("x2cScope_Scope", "X2CScope")
+    x2cScopecomponent.addCapability("x2cScope_Scope", "Data stream")

@@ -22,17 +22,288 @@
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *****************************************************************************"""
 
-x2cScopeCommInterfaceTypes     =  ["UART"]
+#-------------------------------------------------------------------------------------------#
+#                                     Imports                                               #
+#-------------------------------------------------------------------------------------------#
+import os.path
+import xml.etree.ElementTree as ET
 
-global x2cScopeUartId
-global x2cScopeUartBaudRateSymbolName
+#-------------------------------------------------------------------------------------------#
+#                                  Global variables                                         #
+#-------------------------------------------------------------------------------------------#
 
-def x2cScopeBaudRateDep(symbol,event):
-    Database.setSymbolValue(x2cScopeUartId.getValue(), x2cScopeUartBaudRateSymbolName.getValue(), event["value"])
+#-------------------------------------------------------------------------------------------#
+#                                  File inclusions                                          #
+#-------------------------------------------------------------------------------------------#
+execfile(Module.getPath() + "/config/general_functions.py"  )
+execfile(Module.getPath() + "/config/code_Generation.py"  )
+
+#-------------------------------------------------------------------------------------------#
+#                                      Classes                                              #
+#-------------------------------------------------------------------------------------------#
+
+class X2CScope_InstanceClass:
+    def __init__(self, component):
+        self.component = component
+        MCU = Variables.get("__PROCESSOR")
+        if( ("SAME7" in MCU) or ("SAMV7" in MCU) or ("SAMS7" in MCU)):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "BAUD_RATE"
+            self.functionMap = {"TRANSMIT": {}, "RECEIVE": {}}
+
+            modulePath = "/avr-tools-device-file/devices/device/peripherals/module@[name=\"UART\"]"
+            moduleRoot = ATDF.getNode(modulePath).getChildren()
+
+            for module in moduleRoot:
+                moduleInstance = module.getAttribute("name")
+
+                channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
+                channelRoot = ATDF.getNode(channelPath).getChildren()
+             
+                for channel in channelRoot:
+                    if(channel.getAttribute("group") == "URXD"):
+                        try:
+                            self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
+                            
+                    elif(channel.getAttribute("group") == "UTXD"):
+                        try:
+                            self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]
+
+                      
+        elif("PIC32MK" in MCU):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
+
+            # Pin to quadrature decoder mapping       
+            currentPath = Variables.get("__CSP_DIR") + "/peripheral/gpio_02467"
+            deviceXmlPath = os.path.join(currentPath, "plugin/pin_xml/components/" + Variables.get("__PROCESSOR") + ".xml")
+            deviceXmlTree = ET.parse(deviceXmlPath)
+            deviceXmlRoot = deviceXmlTree.getroot()
+            pinoutXmlName = deviceXmlRoot.get("pins")
+            pinoutXmlPath = os.path.join(currentPath, "plugin/pin_xml/pins/" + pinoutXmlName + ".xml")
+            pinoutXmlPath = os.path.normpath(pinoutXmlPath)
+
+            familiesXmlName = deviceXmlRoot.get("families")
+            familiesXmlPath = os.path.join(currentPath, "plugin/pin_xml/families/" + familiesXmlName + ".xml")
+            familiesXmlPath = os.path.normpath(familiesXmlPath)
+
+            pinFileContent = ET.fromstring((open(familiesXmlPath, "r")).read())
+
+            self.functionMap = {"TRANSMIT": {}, "RECEIVE":{}}
+            for group in pinFileContent.findall("groups/group"):
+                for function in group.findall("function"):
+                    if function.attrib["name"].startswith("U") and "TX" in function.attrib["name"]:
+                        for pin in group.findall("pin"):
+                            channel = self.numericFilter(function.attrib["name"])
+                            unit = "UART" + channel
+                            pad = self.stringReplace(pin.attrib["name"])
+
+                            try:
+                                self.functionMap["TRANSMIT"][unit].append( pad )
+                            except:
+                                self.functionMap["TRANSMIT"][unit] = list()  
+                                self.functionMap["TRANSMIT"][unit] = [pad]
+                     
+                    if function.attrib["name"].startswith("U") and "RX" in function.attrib["name"]:
+                        for pin in group.findall("pin"):
+                            channel = self.numericFilter(function.attrib["name"])
+                            unit = "UART" + channel
+                            pad = self.stringReplace(pin.attrib["name"])
+
+                            try:
+                                self.functionMap["RECEIVE"][unit].append(pad)
+                            except:
+                                self.functionMap["RECEIVE"][unit] = list()  
+                                self.functionMap["RECEIVE"][unit] = [pad]  
+            
+        elif(("PIC32CM" in MCU) or ("SAMD2" in MCU) or ("SAMC2" in MCU) or ("SAML2" in MCU)):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "BAUD_RATE"
+            self.functionMap = {"TRANSMIT": {}, "RECEIVE": {}}
+
+            modulePath = "/avr-tools-device-file/devices/device/peripherals/module@[name=\"SERCOM\"]"
+            moduleRoot = ATDF.getNode(modulePath).getChildren()
+
+            for module in moduleRoot:
+                moduleInstance = module.getAttribute("name")
+
+                channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
+                channelRoot = ATDF.getNode(channelPath).getChildren()
+             
+                for channel in channelRoot:
+                    if(channel.getAttribute("index") != "0"):
+                        try:
+                            self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
+                            
+                    elif(channel.getAttribute("index") != "1"):
+                        try:
+                            self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]
+                   
+                   
+        elif( ("SAMD5" in MCU) or ("SAME5" in MCU)):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "BAUD_RATE"
+            self.functionMap = {"TRANSMIT": {}, "RECEIVE": {}}
+
+            modulePath = "/avr-tools-device-file/devices/device/peripherals/module@[name=\"SERCOM\"]"
+            moduleRoot = ATDF.getNode(modulePath).getChildren()
+
+            for module in moduleRoot:
+                moduleInstance = module.getAttribute("name")
+
+                channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
+                channelRoot = ATDF.getNode(channelPath).getChildren()
+             
+                for channel in channelRoot:
+                    if(channel.getAttribute("index") != "0"):
+                        try:
+                            self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
+                            
+                    elif(channel.getAttribute("index") != "1"):
+                        try:
+                            self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]     
+            
+        elif("PIC32MX" in MCU):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
+           
+        elif("PIC32MZ" in MCU):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
+
+        else:
+            Log.writeInfoMessage("Device Not Supported by X2C Scope")
+    
+    def getLibraryName(self):
+        return self.librayName
+
+    def stringReplace( self, my_String ):
+        my_String = my_String.replace("RP","R")
+        return my_String
+
+    def numericFilter( self, input_String ):
+        numeric_filter = filter(str.isdigit, str(input_String))
+        return "".join(numeric_filter)
+
+    def createSymbols(self):
+        supported_Peripherals = ["UART"]
+        sym_PERIPHERAL = self.component.createComboSymbol("X2C_COMM_INT", None, supported_Peripherals)
+        sym_PERIPHERAL.setLabel("Communication Interface")
+        sym_PERIPHERAL.setDefaultValue("UART")
+
+        global sym_INSTANCE
+        instanceList = sorted(self.functionMap["RECEIVE"].keys())
+        sym_INSTANCE = self.component.createComboSymbol("X2C_COMM_INSTANCE", sym_PERIPHERAL, instanceList)
+        sym_INSTANCE.setLabel("Peripheral")
+        sym_INSTANCE.setDefaultValue(instanceList[0])
+        sym_INSTANCE.setDependencies(self.changeInstance, ["X2C_COMM_INSTANCE"])
+        sym_INSTANCE.setReadOnly(True)
+        
+        # Transmission pin 
+        global sym_TRANSMIT
+        sym_TRANSMIT = mcFun_AdvancedComboSymbol("Transmit", "TRANSMIT", self.component)
+        sym_TRANSMIT.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["TRANSMIT"])
+        sym_TRANSMIT.setDefaultValue(self.functionMap["TRANSMIT"][instanceList[0]][0])
+        sym_TRANSMIT.setReadOnly(True)
+        
+        # Reception pin 
+        global sym_RECEIVE
+        sym_RECEIVE = mcFun_AdvancedComboSymbol("Receive", "RECEIVE", self.component)
+        sym_RECEIVE.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["RECEIVE"])
+        sym_RECEIVE.setDefaultValue(self.functionMap["RECEIVE"][instanceList[0]][0])
+        sym_RECEIVE.setReadOnly(True)
+       
+        sym_BAUD_RATE = self.component.createIntegerSymbol("X2C_SCOPE_BAUD_RATE", sym_PERIPHERAL)
+        sym_BAUD_RATE.setLabel("Baud Rate")
+        sym_BAUD_RATE.setDefaultValue(115200)
+        sym_BAUD_RATE.setDependencies(self.updatePeripheral, ["X2C_SCOPE_BAUD_RATE"])
+
+        global global_SELECTED_INSTANCE         
+        global_SELECTED_INSTANCE = self.component.createStringSymbol("X2C_SCOPE_UART_ID", None)
+        global_SELECTED_INSTANCE.setVisible(False)
+
+        sym_USED_PERIPHERAL = self.component.createStringSymbol("X2C_SCOPE_PERIPH_USED", None)
+        sym_USED_PERIPHERAL.setValue(sym_INSTANCE.getValue())
+        sym_USED_PERIPHERAL.setVisible(False)
+
+    def setSymbolValues(self):
+        information = Database.sendMessage("bsp", "X2CSCOPE_READ_DAM_INFORMATION", {})
+        if ( None != information):
+            sym_INSTANCE.setValue(information["TRANSMIT"]["FUNCTION"][0][0])
+            sym_TRANSMIT.setValue(information["TRANSMIT"]["PAD"])
+            sym_RECEIVE.setValue(information["RECEIVE"]["PAD"])
+
+    def handleMessage(self, ID, information):
+        if("BSP_DATA_MONITORING" == ID) and ( None != information):
+            sym_INSTANCE.setValue(information["TRANSMIT"]["FUNCTION"][0][0])
+            sym_TRANSMIT.setValue(information["TRANSMIT"]["PAD"])
+            sym_RECEIVE.setValue(information["RECEIVE"]["PAD"])
+
+
+
+    def changeInstance(self, symbol, event):
+        # Disconnect existing peripheral instance
+
+        # Connect new instance 
+
+        pass
 
     
-    
+    def updatePeripheral(self, symbol, event):
+        status = setDatabaseSymbol(symbol.getValue(), global_BAUD_RATE_SYMBOL, event["value"])
+        
+        if status == False:
+            # Log error
+            pass
 
+
+
+    def onAttachmentConnected( self, source, target):
+        pass
+
+    def onAttachmentDisconnected( self, source, target):
+        pass
+
+    def __call__(self):
+        self.createSymbols()
+        self.setSymbolValues()
+
+#-------------------------------------------------------------------------------------------#
+#                                      Component                                            #
+#-------------------------------------------------------------------------------------------#
+"""
+Description:
+This function is used to set database symbols 
+"""
+def setDatabaseSymbol(nameSpace, ID, value):
+    status = Database.setSymbolValue(nameSpace, ID, value)
+    if status == False:
+        # Log error
+        pass
+
+"""
+Description:
+This function is used to handle message
+"""
+def handleMessage(messageID, args):
+    init_Component.handleMessage(messageID, args)
+
+"""
+Description:
+This function performs the task when the X2CScope module is connected
+"""
 def onAttachmentConnected(source, target):
 
     localComponent = source["component"]
@@ -44,16 +315,20 @@ def onAttachmentConnected(source, target):
     
     
     if (srcID == "x2cScopeUartDependency"):
-        periph_name = Database.getSymbolValue(remoteID, "USART_PLIB_API_PREFIX")
+        peripheralName = Database.getSymbolValue(remoteID, "USART_PLIB_API_PREFIX")
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").setValue("UART")
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").clearValue()
-        localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").setValue(periph_name)
-        Database.setSymbolValue(remoteID, "USART_INTERRUPT_MODE", False)
-        Database.setSymbolValue(remoteID, x2cScopeUartBaudRateSymbolName.getValue(), localComponent.getSymbolByID("X2C_SCOPE_BAUD_RATE").getValue())
-        x2cScopeUartId.setValue(remoteID)
+        localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").setValue(peripheralName)
+
+        setDatabaseSymbol(remoteID, "USART_INTERRUPT_MODE", False)
+        setDatabaseSymbol(remoteID, global_BAUD_RATE_SYMBOL, localComponent.getSymbolByID("X2C_SCOPE_BAUD_RATE").getValue())
+        global_SELECTED_INSTANCE.setValue(remoteID)
 
         
-
+"""
+Description:
+This function performs the task when the X2CScope module is disconnected
+"""
 def onAttachmentDisconnected(source, target):
     
     localComponent = source["component"]
@@ -65,185 +340,16 @@ def onAttachmentDisconnected(source, target):
     if (srcID == "x2cScopeUartDependency"):
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").clearValue()
  
-
-def setPeriphUsed(symbol, event):
-    component = symbol.getComponent()
-    if (event["value"] == "UART"):
-        component.setDependencyEnabled("x2cScopeUartDependency", True)
+"""
+Description:
+This function instantiates the X2CScope module
+"""
+def instantiateComponent(component):
         
-        
-
-################################################################################
-#### Component ####
-################################################################################
-def instantiateComponent(x2cScopecomponent):
-
-    global x2cScopeUartId
-    global x2cScopeUartBaudRateSymbolName
-    configName = Variables.get("__CONFIGURATION_NAME")
+    global init_Component
+    init_Component = X2CScope_InstanceClass(component)
+    init_Component()
     
-    x2cScopeCommInterface = x2cScopecomponent.createComboSymbol("X2C_COMM_INT", None, x2cScopeCommInterfaceTypes)
-    x2cScopeCommInterface.setLabel("Communication Interface")
-    x2cScopeCommInterface.setDefaultValue("UART")
-   # x2cScopeCommInterface.setDependencies(setPeriphUsed, ["X2C_COMM_INT"])
-    
-    
-    x2cScopePeriphUsed = x2cScopecomponent.createStringSymbol("X2C_SCOPE_PERIPH_USED", None)
-    x2cScopePeriphUsed.setValue(x2cScopeCommInterface.getValue())
-    x2cScopePeriphUsed.setVisible(False)
-
-    
-    x2cScopeBaudRate = x2cScopecomponent.createIntegerSymbol("X2C_SCOPE_BAUD_RATE", None)
-    x2cScopeBaudRate.setLabel("Baud Rate")
-    x2cScopeBaudRate.setDefaultValue(115200)
-    
-    x2cScopeBaudRateDummy = x2cScopecomponent.createIntegerSymbol("X2C_SCOPE_BAUD_RATE_DUMMY", None)
-    x2cScopeBaudRateDummy.setVisible(False)
-    x2cScopeBaudRateDummy.setDependencies(x2cScopeBaudRateDep, ["X2C_SCOPE_BAUD_RATE"])
-    
-    x2cScopeUartId = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_ID", None)
-    x2cScopeUartId.setVisible(False)
-        
-    print (Variables.get("__PROCESSOR"))
-    
-    # Include Library Files    
-    if( ("SAME7" in Variables.get("__PROCESSOR")) or ("SAMV7" in Variables.get("__PROCESSOR")) or ("SAMS7" in Variables.get("__PROCESSOR"))):
-        x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_CORTEXM7_X2C_SCOPE_A", None)
-        x2cScopeLibraryFile.setSourcePath("/library/lib/libCORTEXM7_X2CScope.a")
-        x2cScopeLibraryFile.setOutputName("libCORTEXM7_X2CScope.a")
-        x2cScopeLibraryFile.setDestPath("/X2CCode/X2CScope/lib/")
-        x2cScopeUartBaudRateSymbolName = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_BAUD_RATE_SYMBOL", None)
-        x2cScopeUartBaudRateSymbolName.setVisible(False)
-        x2cScopeUartBaudRateSymbolName.setValue("BAUD_RATE")
-        Log.writeInfoMessage("Cortex M7 Device Detected")
-        Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")        
-        
-    elif("PIC32MK" in Variables.get("__PROCESSOR")):
-        x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_PIC32MK_X2C_SCOPE_A", None)
-        x2cScopeLibraryFile.setSourcePath("/library/lib/libPIC32MK_X2CScope.a")
-        x2cScopeLibraryFile.setOutputName("libPIC32MK_X2CScope.a")
-        x2cScopeLibraryFile.setDestPath("/X2CCode/X2CScope/lib/")
-        x2cScopeUartBaudRateSymbolName = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_BAUD_RATE_SYMBOL", None)
-        x2cScopeUartBaudRateSymbolName.setVisible(False)
-        x2cScopeUartBaudRateSymbolName.setValue("BAUD_RATE")
-        Log.writeInfoMessage("MIPS M14K Device Detected")        
-        Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")        
-        
-    elif(("PIC32CM" in Variables.get("__PROCESSOR")) or ("SAMD2" in Variables.get("__PROCESSOR")) or ("SAMC2" in Variables.get("__PROCESSOR")) or ("SAML2" in Variables.get("__PROCESSOR"))):
-        x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_CORTEXM0PLUS_X2C_SCOPE_A", None)
-        x2cScopeLibraryFile.setSourcePath("/library/lib/libCORTEXM0PLUS_X2CScope.a")
-        x2cScopeLibraryFile.setOutputName("libCORTEXM0PLUS_X2CScope.a")
-        x2cScopeLibraryFile.setDestPath("/X2CCode/X2CScope/lib/")
-        x2cScopeUartBaudRateSymbolName = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_BAUD_RATE_SYMBOL", None)
-        x2cScopeUartBaudRateSymbolName.setVisible(False)
-        x2cScopeUartBaudRateSymbolName.setValue("USART_BAUD_RATE")
-        Log.writeInfoMessage("Cortex M0+ Device Detected")
-        Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")
-    
-    elif( ("SAMD5" in Variables.get("__PROCESSOR")) or ("SAME5" in Variables.get("__PROCESSOR"))):
-        x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_CORTEXM4_X2C_SCOPE_A", None)
-        x2cScopeLibraryFile.setSourcePath("/library/lib/libCORTEXM4_X2CScope.a")
-        x2cScopeLibraryFile.setOutputName("libCORTEXM4_X2CScope.a")
-        x2cScopeLibraryFile.setDestPath("/X2CCode/X2CScope/lib/")
-        x2cScopeUartBaudRateSymbolName = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_BAUD_RATE_SYMBOL", None)
-        x2cScopeUartBaudRateSymbolName.setVisible(False)
-        x2cScopeUartBaudRateSymbolName.setValue("USART_BAUD_RATE")        
-        Log.writeInfoMessage("Cortex M4 Device Detected")        
-        Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")                
-        
-    elif("PIC32MX" in Variables.get("__PROCESSOR")):
-        x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_PIC32MX_X2C_SCOPE_A", None)
-        x2cScopeLibraryFile.setSourcePath("/library/lib/libPIC32MX_X2CScope.a")
-        x2cScopeLibraryFile.setOutputName("libPIC32MX_X2CScope.a")
-        x2cScopeLibraryFile.setDestPath("/X2CCode/X2CScope/lib/")
-        x2cScopeUartBaudRateSymbolName = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_BAUD_RATE_SYMBOL", None)
-        x2cScopeUartBaudRateSymbolName.setVisible(False)
-        x2cScopeUartBaudRateSymbolName.setValue("BAUD_RATE")        
-        Log.writeInfoMessage("MIPS MX Device Detected") 
-        Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")        
-
-    elif("PIC32MZ" in Variables.get("__PROCESSOR")):
-        x2cScopeLibraryFile = x2cScopecomponent.createLibrarySymbol("LIB_PIC32MZ_X2C_SCOPE_A", None)
-        x2cScopeLibraryFile.setSourcePath("/library/lib/libPIC32MZ_X2CScope.a")
-        x2cScopeLibraryFile.setOutputName("libPIC32MZ_X2CScope.a")
-        x2cScopeLibraryFile.setDestPath("/X2CCode/X2CScope/lib/")
-        x2cScopeUartBaudRateSymbolName = x2cScopecomponent.createStringSymbol("X2C_SCOPE_UART_BAUD_RATE_SYMBOL", None)
-        x2cScopeUartBaudRateSymbolName.setVisible(False)
-        x2cScopeUartBaudRateSymbolName.setValue("BAUD_RATE")        
-        Log.writeInfoMessage("MIPS MZ Device Detected")
-        Log.writeInfoMessage("Please ensure X2C Scope Plugin is installed from MPLABX Plugin Manager ")        
-
-
-    else:
-        Log.writeInfoMessage("Device Not Supported by X2C Scope")
-        
-        
-#Include Source Files
-    configName = Variables.get("__CONFIGURATION_NAME")
-    
-    x2cScopeSourceFile = x2cScopecomponent.createFileSymbol("X2C_SCOPE_C", None)
-    x2cScopeSourceFile.setSourcePath("/library/src/X2CScope.c")
-    x2cScopeSourceFile.setOutputName("X2CScope.c")
-    x2cScopeSourceFile.setDestPath("/X2CCode/X2CScope/src")
-    x2cScopeSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
-    x2cScopeSourceFile.setType("SOURCE")
-    x2cScopeSourceFile.setOverwrite(True)
-    x2cScopeSourceFile.setEnabled(True) 
-    x2cScopeSourceFile.setMarkup(True)
-    
-    x2cScopeSourceFile = x2cScopecomponent.createFileSymbol("X2C_SCOPE_COMMUNICATION_C", None)
-    x2cScopeSourceFile.setSourcePath("/templates/X2CScopeCommunication.c.ftl")
-    x2cScopeSourceFile.setOutputName("X2CScopeCommunication.c")
-    x2cScopeSourceFile.setDestPath("/X2CCode/X2CScope/src/")
-    x2cScopeSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
-    x2cScopeSourceFile.setType("SOURCE")
-    x2cScopeSourceFile.setOverwrite(True)
-    x2cScopeSourceFile.setEnabled(True) 
-    x2cScopeSourceFile.setMarkup(True)    
-    
-#Include Header Files
-
-    x2cScopeSourceFile = x2cScopecomponent.createFileSymbol("X2C_SCOPE_H", None)
-    x2cScopeSourceFile.setSourcePath("/library/inc/X2CScope.h")
-    x2cScopeSourceFile.setOutputName("X2CScope.h")
-    x2cScopeSourceFile.setDestPath("/X2CCode/X2CScope/inc/")
-    x2cScopeSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
-    x2cScopeSourceFile.setType("HEADER")
-    x2cScopeSourceFile.setOverwrite(True)
-    x2cScopeSourceFile.setEnabled(True) 
-    x2cScopeSourceFile.setMarkup(True)
-
-    x2cScopeSourceFile = x2cScopecomponent.createFileSymbol("X2C_SCOPE_COMMUNICATION_H", None)
-    x2cScopeSourceFile.setSourcePath("/library/inc/X2CScopeCommunication.h")
-    x2cScopeSourceFile.setOutputName("X2CScopeCommunication.h")
-    x2cScopeSourceFile.setDestPath("/X2CCode/X2CScope/inc/")
-    x2cScopeSourceFile.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
-    x2cScopeSourceFile.setType("HEADER")
-    x2cScopeSourceFile.setOverwrite(True)
-    x2cScopeSourceFile.setEnabled(True) 
-    x2cScopeSourceFile.setMarkup(True)     
-    
-    # Generate Initialization File
-
-
-    x2c_scope_InitFile = x2cScopecomponent.createFileSymbol("INITIALIZATION_X2C_SCOPE_C", None)
-    x2c_scope_InitFile.setType("STRING")
-    x2c_scope_InitFile.setOutputName("core.LIST_SYSTEM_INIT_C_INITIALIZE_MIDDLEWARE")
-    x2c_scope_InitFile.setSourcePath("templates/system/initialization.c.ftl")
-    x2c_scope_InitFile.setMarkup(True)
-
-    x2cScopeSystemDefFile = x2cScopecomponent.createFileSymbol("X2C_SCOPE_SYS_DEF_HEADER", None)
-    x2cScopeSystemDefFile.setType("STRING")
-    x2cScopeSystemDefFile.setOutputName("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
-    x2cScopeSystemDefFile.setSourcePath("templates/system/definitions.h.ftl")
-    x2cScopeSystemDefFile.setMarkup(True)
-    
-    #include directories
-    x2c_scope_include = x2cScopecomponent.createSettingSymbol("X2C_SCOPE_INCLUDE", None)
-    x2c_scope_include.setCategory("C32")
-    x2c_scope_include.setKey("extra-include-directories")
-    x2c_scope_include.setValue("../src/config/"+ configName + "/X2CCode")
-    x2c_scope_include.setAppend(True, ";")
-    
-
-
+    global code_Generation
+    code_Generation = X2CScope_CodeGenerationClass(component)
+    code_Generation()
