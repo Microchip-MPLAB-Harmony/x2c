@@ -36,7 +36,7 @@ import xml.etree.ElementTree as ET
 #                                  File inclusions                                          #
 #-------------------------------------------------------------------------------------------#
 execfile(Module.getPath() + "/config/general_functions.py"  )
-execfile(Module.getPath() + "/config/code_Generation.py"  )
+execfile(Module.getPath() + "/config/code_generation.py"  )
 
 #-------------------------------------------------------------------------------------------#
 #                                      Classes                                              #
