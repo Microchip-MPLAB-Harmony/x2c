@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Module  version ="3.0.0" name="X2C-Scope" id="35ee4b59-0183-4c63-9d34-7a37c782300e">
+<Module  version ="3.1.0" name="X2C-Scope" id="35ee4b59-0183-4c63-9d34-7a37c782300e">
     <ConfigRoot path="config/module.py"/>
 </Module>

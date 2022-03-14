@@ -3,6 +3,25 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+## X2C Release v1.2.0
+
+### New Features
+This release includes following updates for X2C Scope:
+ - BSP support for SAM E70, PIC32MK and SAM E54 PIMs 
+ 
+### Known Issues
+
+Same as v1.1.0
+
+### Development Tools
+
+* [MPLAB® X IDE v6.00](https://www.microchip.com/mplab/mplab-x-ide)
+* [MPLAB® XC32 C/C++ Compiler v4.00](https://www.microchip.com/mplab/compilers)
+* [X2C v6.3 (https://x2c.lcm.at/downloads/)
+* MPLAB® X IDE plug-ins:
+    * MPLAB® Code Configurator (MCC) v5.1.1
+    * X2CScope v1.3.0 
+
 ## X2C Release v1.1.4
 ### Bug Fixes
 - Fixed X2CScope library issues to support XC32 compiler v3.00
