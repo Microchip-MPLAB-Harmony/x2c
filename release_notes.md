@@ -19,7 +19,7 @@ Same as v1.1.0
 * [MPLAB® XC32 C/C++ Compiler v4.00](https://www.microchip.com/mplab/compilers)
 * [X2C v6.3 (https://x2c.lcm.at/downloads/)
 * MPLAB® X IDE plug-ins:
-    * MPLAB® Code Configurator (MCC) v5.1.1
+    * MPLAB® Code Configurator (MCC) v5.1.2
     * X2CScope v1.3.0 
 
 ## X2C Release v1.1.4
