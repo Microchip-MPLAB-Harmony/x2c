@@ -11,13 +11,14 @@ This release includes following updates for X2C Scope:
  
 ### Known Issues
 
-Same as v1.1.0
+* Same as v1.1.0
+* X2C Scope plugin v1.3.0 is unable to launch X2C Scope window. The fix will be available soon.
 
 ### Development Tools
 
 * [MPLAB® X IDE v6.00](https://www.microchip.com/mplab/mplab-x-ide)
 * [MPLAB® XC32 C/C++ Compiler v4.00](https://www.microchip.com/mplab/compilers)
-* [X2C v6.3 (https://x2c.lcm.at/downloads/)
+* [X2C v6.3] (https://x2c.lcm.at/downloads/)
 * MPLAB® X IDE plug-ins:
     * MPLAB® Code Configurator (MCC) v5.1.2
     * X2CScope v1.3.0 
@@ -34,7 +35,7 @@ Same as v1.1.0
 
 * [MPLAB® X IDE v5.45](https://www.microchip.com/mplab/mplab-x-ide)
 * [MPLAB® XC32 C/C++ Compiler v3.00](https://www.microchip.com/mplab/compilers)
-* [X2C v6.3 (https://x2c.lcm.at/downloads/)
+* [X2C v6.3] (https://x2c.lcm.at/downloads/)
 * MPLAB® X IDE plug-ins:
     * MPLAB® Harmony Configurator (MHC) v3.6.1
     * X2CScope v1.3.0 
@@ -52,7 +53,7 @@ Same as v1.1.0
 
 * [MPLAB® X IDE v5.45](https://www.microchip.com/mplab/mplab-x-ide)
 * [MPLAB® XC32 C/C++ Compiler v2.50](https://www.microchip.com/mplab/compilers)
-* [X2C v6.3 (https://x2c.lcm.at/downloads/)
+* [X2C v6.3] (https://x2c.lcm.at/downloads/)
 * MPLAB® X IDE plug-ins:
     * MPLAB® Harmony Configurator (MHC) v3.6.1
     * X2CScope v1.3.0 
