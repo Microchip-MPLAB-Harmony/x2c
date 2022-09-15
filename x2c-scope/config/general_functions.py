@@ -105,5 +105,12 @@ class mcFun_AdvancedComboSymbol:
         else:
             symbol.setVisible(False)
 
+    def setVisible(self, value):
+        instance = self.dependency.getValue()
+        for key in self.data.keys():
+            if( key == instance ):
+                return self.symbol[key].setVisible(value)
+
+
     def callbackFunction(self, symbol, event):
         self.final.setValue(self.numericFilter(self.getValue()))

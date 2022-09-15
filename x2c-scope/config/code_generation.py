@@ -34,7 +34,7 @@ class X2CScope_CodeGenerationClass:
         self.component = component
 
         MCU = Variables.get("__PROCESSOR")
-        if( ("SAME7" in MCU) or ("SAMV7" in MCU) or ("SAMS7" in MCU)):
+        if( ("SAME7" in MCU) or ("SAMV7" in MCU) or ("SAMS7" in MCU) or ("SAMRH707" in MCU)):
             self.libraryName = "libCORTEXM7_X2CScope.a"
                               
         elif("PIC32MK" in MCU):

@@ -45,6 +45,7 @@ execfile(Module.getPath() + "/config/code_generation.py"  )
 class X2CScope_InstanceClass:
     def __init__(self, component):
         self.component = component
+        self.functionMap = {}
         MCU = Variables.get("__PROCESSOR")
         if( ("SAME7" in MCU) or ("SAMV7" in MCU) or ("SAMS7" in MCU)):
             global global_BAUD_RATE_SYMBOL
@@ -183,6 +184,32 @@ class X2CScope_InstanceClass:
             global global_BAUD_RATE_SYMBOL
             global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
 
+        elif("SAMRH707" in MCU):
+            global global_BAUD_RATE_SYMBOL
+            global_BAUD_RATE_SYMBOL = "BAUD_RATE"
+            self.functionMap = {"TRANSMIT": {}, "RECEIVE": {}}
+
+            modulePath = "/avr-tools-device-file/devices/device/peripherals/module@[name=\"FLEXCOM\"]"
+            moduleRoot = ATDF.getNode(modulePath).getChildren()
+
+            for module in moduleRoot:
+                moduleInstance = module.getAttribute("name")
+
+                channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
+                channelRoot = ATDF.getNode(channelPath).getChildren()
+             
+                for channel in channelRoot:
+                    if(channel.getAttribute("index") != "0"):
+                        try:
+                            self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
+                            
+                    elif(channel.getAttribute("index") != "1"):
+                        try:
+                            self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
+                        except:
+                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]     
         else:
             Log.writeInfoMessage("Device Not Supported by X2C Scope")
     
@@ -203,27 +230,31 @@ class X2CScope_InstanceClass:
         sym_PERIPHERAL.setLabel("Communication Interface")
         sym_PERIPHERAL.setDefaultValue("UART")
 
-        global sym_INSTANCE
-        instanceList = sorted(self.functionMap["RECEIVE"].keys())
-        sym_INSTANCE = self.component.createComboSymbol("X2C_COMM_INSTANCE", sym_PERIPHERAL, instanceList)
-        sym_INSTANCE.setLabel("Peripheral")
-        sym_INSTANCE.setDefaultValue(instanceList[0])
-        sym_INSTANCE.setDependencies(self.changeInstance, ["X2C_COMM_INSTANCE"])
-        sym_INSTANCE.setReadOnly(True)
-        
-        # Transmission pin 
-        global sym_TRANSMIT
-        sym_TRANSMIT = mcFun_AdvancedComboSymbol("Transmit", "TRANSMIT", self.component)
-        sym_TRANSMIT.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["TRANSMIT"])
-        sym_TRANSMIT.setDefaultValue(self.functionMap["TRANSMIT"][instanceList[0]][0])
-        sym_TRANSMIT.setReadOnly(True)
-        
-        # Reception pin 
-        global sym_RECEIVE
-        sym_RECEIVE = mcFun_AdvancedComboSymbol("Receive", "RECEIVE", self.component)
-        sym_RECEIVE.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["RECEIVE"])
-        sym_RECEIVE.setDefaultValue(self.functionMap["RECEIVE"][instanceList[0]][0])
-        sym_RECEIVE.setReadOnly(True)
+        if (self.functionMap):
+            global sym_INSTANCE
+            instanceList = sorted(self.functionMap["RECEIVE"].keys())
+            sym_INSTANCE = self.component.createComboSymbol("X2C_COMM_INSTANCE", sym_PERIPHERAL, instanceList)
+            sym_INSTANCE.setLabel("Peripheral")
+            sym_INSTANCE.setDefaultValue(instanceList[0])
+            sym_INSTANCE.setDependencies(self.changeInstance, ["X2C_COMM_INSTANCE"])
+            sym_INSTANCE.setReadOnly(True)
+            sym_INSTANCE.setVisible(False)
+            
+            # Transmission pin 
+            global sym_TRANSMIT
+            sym_TRANSMIT = mcFun_AdvancedComboSymbol("Transmit", "TRANSMIT", self.component)
+            sym_TRANSMIT.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["TRANSMIT"])
+            sym_TRANSMIT.setVisible(False)
+            sym_TRANSMIT.setDefaultValue(self.functionMap["TRANSMIT"][instanceList[0]][0])
+            sym_TRANSMIT.setReadOnly(True)
+            
+            # Reception pin 
+            global sym_RECEIVE
+            sym_RECEIVE = mcFun_AdvancedComboSymbol("Receive", "RECEIVE", self.component)
+            sym_RECEIVE.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["RECEIVE"])
+            sym_RECEIVE.setDefaultValue(self.functionMap["RECEIVE"][instanceList[0]][0])
+            sym_RECEIVE.setReadOnly(True)
+            sym_RECEIVE.setVisible(False)
        
         sym_BAUD_RATE = self.component.createIntegerSymbol("X2C_SCOPE_BAUD_RATE", sym_PERIPHERAL)
         sym_BAUD_RATE.setLabel("Baud Rate")
