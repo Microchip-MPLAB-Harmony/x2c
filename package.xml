@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Package name="x2c">
     <Dependencies>
-        <Dependency name="csp" version="v3.11.0"/>
+        <Dependency name="csp" version="v3.14.0"/>
     </Dependencies>
 </Package>
