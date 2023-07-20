@@ -60,26 +60,26 @@ class X2CScope_InstanceClass:
 
                 channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
                 channelRoot = ATDF.getNode(channelPath).getChildren()
-             
+
                 for channel in channelRoot:
                     if(channel.getAttribute("group") == "URXD"):
                         try:
                             self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
                             self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
-                            
+
                     elif(channel.getAttribute("group") == "UTXD"):
                         try:
                             self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
                             self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]
 
-                      
+
         elif("PIC32MK" in MCU):
             global global_BAUD_RATE_SYMBOL
             global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
 
-            # Pin to quadrature decoder mapping       
+            # Pin to quadrature decoder mapping
             currentPath = Variables.get("__CSP_DIR") + "/peripheral/gpio_02467"
             deviceXmlPath = os.path.join(currentPath, "plugin/pin_xml/components/" + Variables.get("__PROCESSOR") + ".xml")
             deviceXmlTree = ET.parse(deviceXmlPath)
@@ -106,9 +106,9 @@ class X2CScope_InstanceClass:
                             try:
                                 self.functionMap["TRANSMIT"][unit].append( pad )
                             except:
-                                self.functionMap["TRANSMIT"][unit] = list()  
+                                self.functionMap["TRANSMIT"][unit] = list()
                                 self.functionMap["TRANSMIT"][unit] = [pad]
-                     
+
                     if function.attrib["name"].startswith("U") and "RX" in function.attrib["name"]:
                         for pin in group.findall("pin"):
                             channel = self.numericFilter(function.attrib["name"])
@@ -118,9 +118,9 @@ class X2CScope_InstanceClass:
                             try:
                                 self.functionMap["RECEIVE"][unit].append(pad)
                             except:
-                                self.functionMap["RECEIVE"][unit] = list()  
-                                self.functionMap["RECEIVE"][unit] = [pad]  
-            
+                                self.functionMap["RECEIVE"][unit] = list()
+                                self.functionMap["RECEIVE"][unit] = [pad]
+
         elif(("PIC32CM" in MCU) or ("SAMD2" in MCU) or ("SAMC2" in MCU) or ("SAML2" in MCU)):
             global global_BAUD_RATE_SYMBOL
             global_BAUD_RATE_SYMBOL = "BAUD_RATE"
@@ -134,21 +134,20 @@ class X2CScope_InstanceClass:
 
                 channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
                 channelRoot = ATDF.getNode(channelPath).getChildren()
-             
+
                 for channel in channelRoot:
                     if(channel.getAttribute("index") != "0"):
                         try:
                             self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
                             self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
-                            
+
                     elif(channel.getAttribute("index") != "1"):
                         try:
                             self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
                             self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]
-                   
-                   
+
         elif( ("SAMD5" in MCU) or ("SAME5" in MCU)):
             global global_BAUD_RATE_SYMBOL
             global_BAUD_RATE_SYMBOL = "BAUD_RATE"
@@ -162,24 +161,24 @@ class X2CScope_InstanceClass:
 
                 channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
                 channelRoot = ATDF.getNode(channelPath).getChildren()
-             
+
                 for channel in channelRoot:
                     if(channel.getAttribute("index") != "0"):
                         try:
                             self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
                             self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
-                            
+
                     elif(channel.getAttribute("index") != "1"):
                         try:
                             self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
-                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]     
-            
+                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]
+
         elif("PIC32MX" in MCU):
             global global_BAUD_RATE_SYMBOL
             global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
-           
+
         elif("PIC32MZ" in MCU):
             global global_BAUD_RATE_SYMBOL
             global_BAUD_RATE_SYMBOL = "USART_BAUD_RATE"
@@ -197,22 +196,22 @@ class X2CScope_InstanceClass:
 
                 channelPath = modulePath + "/instance@[name=\"" + moduleInstance + "\"]/signals"
                 channelRoot = ATDF.getNode(channelPath).getChildren()
-             
+
                 for channel in channelRoot:
                     if(channel.getAttribute("index") != "0"):
                         try:
                             self.functionMap["RECEIVE"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
                             self.functionMap["RECEIVE"][moduleInstance] = [channel.getAttribute("pad")]
-                            
+
                     elif(channel.getAttribute("index") != "1"):
                         try:
                             self.functionMap["TRANSMIT"][moduleInstance].append(channel.getAttribute("pad"))
                         except:
-                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]     
+                            self.functionMap["TRANSMIT"][moduleInstance] = [channel.getAttribute("pad")]
         else:
             Log.writeInfoMessage("Device Not Supported by X2C Scope")
-    
+
     def getLibraryName(self):
         return self.librayName
 
@@ -233,35 +232,44 @@ class X2CScope_InstanceClass:
         if (self.functionMap):
             global sym_INSTANCE
             instanceList = sorted(self.functionMap["RECEIVE"].keys())
+            instanceList.append("")
             sym_INSTANCE = self.component.createComboSymbol("X2C_COMM_INSTANCE", sym_PERIPHERAL, instanceList)
             sym_INSTANCE.setLabel("Peripheral")
-            sym_INSTANCE.setDefaultValue(instanceList[0])
+            sym_INSTANCE.setDefaultValue("")
             sym_INSTANCE.setDependencies(self.changeInstance, ["X2C_COMM_INSTANCE"])
-            sym_INSTANCE.setReadOnly(True)
-            sym_INSTANCE.setVisible(False)
-            
-            # Transmission pin 
+            sym_INSTANCE.setReadOnly(False)
+            sym_INSTANCE.setVisible(True)
+
+            global sym_OLD_INSTANCE
+            sym_OLD_INSTANCE = self.component.createStringSymbol("X2C_COMM_INSTANCE_OLD", sym_PERIPHERAL)
+            sym_OLD_INSTANCE.setLabel("Old Instance")
+            sym_OLD_INSTANCE.setDefaultValue("")
+            sym_OLD_INSTANCE.setVisible(False)
+
+            # Transmission pin
             global sym_TRANSMIT
             sym_TRANSMIT = mcFun_AdvancedComboSymbol("Transmit", "TRANSMIT", self.component)
-            sym_TRANSMIT.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["TRANSMIT"])
+            sym_TRANSMIT.createComboSymbol( sym_INSTANCE, sym_INSTANCE, self.functionMap["TRANSMIT"])
             sym_TRANSMIT.setVisible(False)
             sym_TRANSMIT.setDefaultValue(self.functionMap["TRANSMIT"][instanceList[0]][0])
             sym_TRANSMIT.setReadOnly(True)
-            
-            # Reception pin 
+
+            # Reception pin
             global sym_RECEIVE
             sym_RECEIVE = mcFun_AdvancedComboSymbol("Receive", "RECEIVE", self.component)
-            sym_RECEIVE.createComboSymbol( sym_INSTANCE, sym_PERIPHERAL, self.functionMap["RECEIVE"])
+            sym_RECEIVE.createComboSymbol( sym_INSTANCE, sym_INSTANCE, self.functionMap["RECEIVE"])
             sym_RECEIVE.setDefaultValue(self.functionMap["RECEIVE"][instanceList[0]][0])
             sym_RECEIVE.setReadOnly(True)
             sym_RECEIVE.setVisible(False)
-       
+
+        global sym_BAUD_RATE
         sym_BAUD_RATE = self.component.createIntegerSymbol("X2C_SCOPE_BAUD_RATE", sym_PERIPHERAL)
         sym_BAUD_RATE.setLabel("Baud Rate")
         sym_BAUD_RATE.setDefaultValue(115200)
+        sym_BAUD_RATE.setVisible(False)
         sym_BAUD_RATE.setDependencies(self.updatePeripheral, ["X2C_SCOPE_BAUD_RATE"])
 
-        global global_SELECTED_INSTANCE         
+        global global_SELECTED_INSTANCE
         global_SELECTED_INSTANCE = self.component.createStringSymbol("X2C_SCOPE_UART_ID", None)
         global_SELECTED_INSTANCE.setVisible(False)
 
@@ -286,26 +294,28 @@ class X2CScope_InstanceClass:
 
     def changeInstance(self, symbol, event):
         # Disconnect existing peripheral instance
+        if "" != sym_OLD_INSTANCE.getValue():
+            # Deactivate the connected component
+            autoConnectTable = [(sym_OLD_INSTANCE.getValue()).lower()]
+            res = Database.deactivateComponents(autoConnectTable)
 
-        # Connect new instance 
+        # Activate and connect peripheral
+        autoConnectTable = [(sym_INSTANCE.getValue()).lower()]
+        res = Database.activateComponents(autoConnectTable)
 
-        pass
+        autoComponentIDTable = [["X2CScope", "x2cScopeUartDependency", (sym_INSTANCE.getValue()).lower(), (sym_INSTANCE.getValue()).upper() + "_UART"]]
+        res = Database.connectDependencies(autoComponentIDTable)
 
-    
+        # Update old instance
+        sym_OLD_INSTANCE.setValue(sym_INSTANCE.getValue())
+
+
     def updatePeripheral(self, symbol, event):
         status = setDatabaseSymbol(symbol.getValue(), global_BAUD_RATE_SYMBOL, event["value"])
-        
+
         if status == False:
             # Log error
             pass
-
-
-
-    def onAttachmentConnected( self, source, target):
-        pass
-
-    def onAttachmentDisconnected( self, source, target):
-        pass
 
     def __call__(self):
         self.createSymbols()
@@ -316,7 +326,7 @@ class X2CScope_InstanceClass:
 #-------------------------------------------------------------------------------------------#
 """
 Description:
-This function is used to set database symbols 
+This function is used to set database symbols
 """
 def setDatabaseSymbol(nameSpace, ID, value):
     status = Database.setSymbolValue(nameSpace, ID, value)
@@ -340,47 +350,54 @@ def onAttachmentConnected(source, target):
     localComponent = source["component"]
     remoteComponent = target["component"]
     remoteID = remoteComponent.getID()
-    
+
     srcID = source["id"]
     targetID = target["id"]
-    
-    
+
+
     if (srcID == "x2cScopeUartDependency"):
         peripheralName = Database.getSymbolValue(remoteID, "USART_PLIB_API_PREFIX")
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").setValue("UART")
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").clearValue()
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").setValue(peripheralName)
 
+        sym_INSTANCE.setValue(remoteID.upper())
+        sym_INSTANCE.setVisible(True)
+        sym_BAUD_RATE.setVisible(True)
+
         setDatabaseSymbol(remoteID, "USART_INTERRUPT_MODE", False)
         setDatabaseSymbol(remoteID, global_BAUD_RATE_SYMBOL, localComponent.getSymbolByID("X2C_SCOPE_BAUD_RATE").getValue())
         global_SELECTED_INSTANCE.setValue(remoteID)
 
-        
+
 """
 Description:
 This function performs the task when the X2CScope module is disconnected
 """
 def onAttachmentDisconnected(source, target):
-    
+
     localComponent = source["component"]
     remoteComponent = target["component"]
     remoteID = remoteComponent.getID()
     srcID = source["id"]
     targetID = target["id"]
 
+    sym_INSTANCE.setVisible(False)
+    sym_BAUD_RATE.setVisible(False)
+
     if (srcID == "x2cScopeUartDependency"):
         localComponent.getSymbolByID("X2C_SCOPE_PERIPH_USED").clearValue()
- 
+
 """
 Description:
 This function instantiates the X2CScope module
 """
 def instantiateComponent(component):
-        
+
     global init_Component
     init_Component = X2CScope_InstanceClass(component)
     init_Component()
-    
+
     global code_Generation
     code_Generation = X2CScope_CodeGenerationClass(component)
     code_Generation()

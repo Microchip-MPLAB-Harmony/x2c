@@ -26,7 +26,7 @@
 * File Name: general_functions.py
 *
 * Description:
-* General functions 
+* General functions
 *
 *****************************************************************************"""
 class X2CScope_CodeGenerationClass:
@@ -36,24 +36,24 @@ class X2CScope_CodeGenerationClass:
         MCU = Variables.get("__PROCESSOR")
         if( ("SAME7" in MCU) or ("SAMV7" in MCU) or ("SAMS7" in MCU) or ("SAMRH707" in MCU)):
             self.libraryName = "libCORTEXM7_X2CScope.a"
-                              
+
         elif("PIC32MK" in MCU):
             self.libraryName = "libPIC32MK_X2CScope.a"
-                  
+
         elif(("PIC32CM" in MCU) or ("SAMD2" in MCU) or ("SAMC2" in MCU) or ("SAML2" in MCU)):
-            self.libraryName = "libCORTEXM0PLUS_X2CScope.a"                   
-                   
+            self.libraryName = "libCORTEXM0PLUS_X2CScope.a"
+
         elif( ("SAMD5" in MCU) or ("SAME5" in MCU)):
             self.libraryName = "libCORTEXM4_X2CScope.a"
-              
+
         elif("PIC32MX" in MCU):
             self.libraryName = "libPIC32MX_X2CScope.a"
-           
+
         elif("PIC32MZ" in MCU):
             self.libraryName = "libPIC32MZ_X2CScope.a"
 
     def generateCode(self):
-        # Include Library Files    
+        # Include Library Files
         sym_LIBARY_FILE = self.component.createLibrarySymbol("LIB_CORTEXM7_X2C_SCOPE_A", None)
         sym_LIBARY_FILE.setSourcePath("/library/lib/" + self.libraryName )
         sym_LIBARY_FILE.setOutputName(self.libraryName)
@@ -61,7 +61,7 @@ class X2CScope_CodeGenerationClass:
 
         #Include Source Files
         configName = Variables.get("__CONFIGURATION_NAME")
-        
+
         sym_SOURCE_FILE = self.component.createFileSymbol("X2C_SCOPE_C", None)
         sym_SOURCE_FILE.setSourcePath("/library/src/X2CScope.c")
         sym_SOURCE_FILE.setOutputName("X2CScope.c")
@@ -69,9 +69,9 @@ class X2CScope_CodeGenerationClass:
         sym_SOURCE_FILE.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
         sym_SOURCE_FILE.setType("SOURCE")
         sym_SOURCE_FILE.setOverwrite(True)
-        sym_SOURCE_FILE.setEnabled(True) 
+        sym_SOURCE_FILE.setEnabled(True)
         sym_SOURCE_FILE.setMarkup(True)
-        
+
         sym_SOURCE_FILE = self.component.createFileSymbol("X2C_SCOPE_COMMUNICATION_C", None)
         sym_SOURCE_FILE.setSourcePath("/templates/X2CScopeCommunication.c.ftl")
         sym_SOURCE_FILE.setOutputName("X2CScopeCommunication.c")
@@ -79,9 +79,9 @@ class X2CScope_CodeGenerationClass:
         sym_SOURCE_FILE.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
         sym_SOURCE_FILE.setType("SOURCE")
         sym_SOURCE_FILE.setOverwrite(True)
-        sym_SOURCE_FILE.setEnabled(True) 
-        sym_SOURCE_FILE.setMarkup(True)    
-        
+        sym_SOURCE_FILE.setEnabled(True)
+        sym_SOURCE_FILE.setMarkup(True)
+
         #Include Header Files
         sym_HEADER_FILE = self.component.createFileSymbol("X2C_SCOPE_H", None)
         sym_HEADER_FILE.setSourcePath("/library/inc/X2CScope.h")
@@ -90,7 +90,7 @@ class X2CScope_CodeGenerationClass:
         sym_HEADER_FILE.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
         sym_HEADER_FILE.setType("HEADER")
         sym_HEADER_FILE.setOverwrite(True)
-        sym_HEADER_FILE.setEnabled(True) 
+        sym_HEADER_FILE.setEnabled(True)
         sym_HEADER_FILE.setMarkup(True)
 
         sym_HEADER_FILE = self.component.createFileSymbol("X2C_SCOPE_COMMUNICATION_H", None)
@@ -100,9 +100,9 @@ class X2CScope_CodeGenerationClass:
         sym_HEADER_FILE.setProjectPath("config/"+configName+"/X2CCode/X2CScope/")
         sym_HEADER_FILE.setType("HEADER")
         sym_HEADER_FILE.setOverwrite(True)
-        sym_HEADER_FILE.setEnabled(True) 
-        sym_HEADER_FILE.setMarkup(True)     
-        
+        sym_HEADER_FILE.setEnabled(True)
+        sym_HEADER_FILE.setMarkup(True)
+
         # Generate Initialization File
         sym_INIT_FILE = self.component.createFileSymbol("INITIALIZATION_X2C_SCOPE_C", None)
         sym_INIT_FILE.setType("STRING")
@@ -115,7 +115,7 @@ class X2CScope_CodeGenerationClass:
         sym_DEFINITION_FILE.setOutputName("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
         sym_DEFINITION_FILE.setSourcePath("templates/system/definitions.h.ftl")
         sym_DEFINITION_FILE.setMarkup(True)
-        
+
         #include directories
         sym_INCLUDE = self.component.createSettingSymbol("sym_INCLUDE", None)
         sym_INCLUDE.setCategory("C32")
@@ -125,7 +125,6 @@ class X2CScope_CodeGenerationClass:
 
     def __call__(self):
         self.generateCode()
-        
 
 
-        
+
