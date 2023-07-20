@@ -27,42 +27,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef X2CSCOPECOMMUNICATION_H
-#define	X2CSCOPECOMMUNICATION_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#include <stdint.h>
-#include "stdbool.h"
+#include "X2C.h"
+#include "X2C_InterfaceHandling.h"
 #include "definitions.h"
 
-typedef void (*SERIAL_SEND)( uint8_t data );
-typedef uint8_t (*SERIAL_RECEIVE)( void );
-typedef uint8_t (*SERIAL_DATA_AVAILABLE)( void );
-typedef uint8_t (*SERIAL_SEND_READY)( void );
-
-/* MISRA C-2012 8.6 deviated below. Deviation record ID - H3_MISRAC_2012_R_8_6_DR_1 */
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunknown-pragmas"
-#pragma coverity compliance block deviate:2 "MISRA C-2012 Rule 8.6" "H3_MISRAC_2012_R_8_6_DR_1"
-
-void X2CScope_Initialise(void);
-void X2CScope_HookUARTFunctions(SERIAL_SEND sendAPI, SERIAL_RECEIVE receiveAPI, \
-                                SERIAL_DATA_AVAILABLE dataAvailableAPI, SERIAL_SEND_READY sendReadyAPI );
-
-void sendSerial(uint8_t data);
-uint8_t receiveSerial(void);
-uint8_t isReceiveDataAvailable(void);
-uint8_t isSendReady(void);
-
-#pragma coverity compliance end_block "MISRA C-2012 Rule 8.6"
-#pragma GCC diagnostic pop
-/* MISRAC 2012 deviation block end */
-
-#ifdef __cplusplus
+void X2C_ReadInports(void)
+{
+	/* TODO add linkage hardware-inputs -> X2C inports here 
+     * Pass the peripheral values to model Inports
+     * if (PORTA & 1) { 
+     *    x2cModel.inports.bInport = INT16_MAX;
+     * }else {
+     *    x2cModel.inports.bInport = 0;
+     * }
+	 */
+	;
 }
-#endif
 
-#endif	/* X2CSCOPECOMMUNICATION_H */
+void X2C_WriteOutports(void)
+{
+	/* TODO add linkage X2C outports -> hardware-outputs here 
+     * if (*x2cModel.outports.bOutport) {  // if model Outport differ than zero 
+     *    LATB |= 1; // set LATB0 
+     * } else {
+     *    LATB &= ~1; // clear LATB0
+     * } 
+	*/
+	;
+}

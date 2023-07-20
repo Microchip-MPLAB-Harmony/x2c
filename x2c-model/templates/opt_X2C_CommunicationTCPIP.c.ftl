@@ -26,43 +26,54 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#include "device.h"
+#include "X2C_Communication.h"
+#include "../tcp_server.h"
 
-#ifndef X2CSCOPECOMMUNICATION_H
-#define	X2CSCOPECOMMUNICATION_H
+//#include "config/default/peripheral/usart/plib_usart1.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/* private prototypes */
+static void sendByte(tSerial* serial, uint8 data);
+static uint8 readByte(tSerial* serial);
+static uint8 isReadyToSend(tSerial* serial);
+static uint8 isDataAvailable(tSerial* serial);
+static void flush(tSerial* serial);
+static uint8 getTxFifoFree(tSerial* serial);
 
-#include <stdint.h>
-#include "stdbool.h"
-#include "definitions.h"
-
-typedef void (*SERIAL_SEND)( uint8_t data );
-typedef uint8_t (*SERIAL_RECEIVE)( void );
-typedef uint8_t (*SERIAL_DATA_AVAILABLE)( void );
-typedef uint8_t (*SERIAL_SEND_READY)( void );
-
-/* MISRA C-2012 8.6 deviated below. Deviation record ID - H3_MISRAC_2012_R_8_6_DR_1 */
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunknown-pragmas"
-#pragma coverity compliance block deviate:2 "MISRA C-2012 Rule 8.6" "H3_MISRAC_2012_R_8_6_DR_1"
-
-void X2CScope_Initialise(void);
-void X2CScope_HookUARTFunctions(SERIAL_SEND sendAPI, SERIAL_RECEIVE receiveAPI, \
-                                SERIAL_DATA_AVAILABLE dataAvailableAPI, SERIAL_SEND_READY sendReadyAPI );
-
-void sendSerial(uint8_t data);
-uint8_t receiveSerial(void);
-uint8_t isReceiveDataAvailable(void);
-uint8_t isSendReady(void);
-
-#pragma coverity compliance end_block "MISRA C-2012 Rule 8.6"
-#pragma GCC diagnostic pop
-/* MISRAC 2012 deviation block end */
-
-#ifdef __cplusplus
+void initCommunication(tSerial* serial) {
+    /* function pointers */
+    serial->send = (void (*)(tInterface*, uint8))sendByte;
+    serial->receive = (uint8(*)(tInterface*))readByte;
+    serial->isReceiveDataAvailable = (uint8(*)(tInterface*))isDataAvailable;
+    serial->isSendReady = (uint8(*)(tInterface*))isReadyToSend;
+    serial->flush = (void (*)(tInterface*))flush;
+    serial->getTxFifoFree = (uint8(*)(tInterface*))getTxFifoFree;
 }
-#endif
 
-#endif	/* X2CSCOPECOMMUNICATION_H */
+void linkCommunication(tProtocol* protocol, tSerial* serial) {
+    protocol->hwInterface = (tInterface*) serial;
+}
+
+static void sendByte(tSerial* serial, uint8 data) {
+    SendTCPByte(&data);
+}
+
+static uint8 readByte(tSerial* serial) {
+    return ReadTCPByte();
+}
+
+static uint8 isReadyToSend(tSerial* serial) {
+    return isTCPReadyToSend();
+}
+
+static uint8 isDataAvailable(tSerial* serial) {
+    return (isTCPDataAvailable());
+}
+
+static void flush(tSerial* serial) {
+    ;
+}
+
+static uint8 getTxFifoFree(tSerial* serial) {
+    return ((uint8) 0);
+}

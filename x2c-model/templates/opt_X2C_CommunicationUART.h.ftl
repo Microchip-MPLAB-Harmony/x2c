@@ -26,43 +26,35 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+ 
+ /** @file
+ * @brief Virtual serial interface via USB.
+ * 
+ * Virtual serial interface uses CDC via USB for serial communication.
+ * 
+ * @warning Currently only one interface is supported due to the need of static-global variables.
+ * @warning Driver does not allow to pass a userdata pointer to all callback functions.
+ */
+ 
+#ifndef __COMMUNICATIONX2C_H__
+#define __COMMUNICATIONX2C_H__
 
-#ifndef X2CSCOPECOMMUNICATION_H
-#define	X2CSCOPECOMMUNICATION_H
+// ChB #include "system_config.h"
+// ChB #include "system_definitions.h"
+#include "CommonFcts.h"
+#include "Target.h"
 
-#ifdef __cplusplus
-extern "C" {
+typedef struct {
+	void (*send)(tInterface*, uint8);               /** Function link to send character */
+	uint8 (*receive)(tInterface*);                  /** Function link to receive character */
+	uint8 (*isReceiveDataAvailable)(tInterface*);   /** Function link to check if receive data is available */
+	uint8 (*isSendReady)(tInterface*);              /** Function link to check if data can be sent */
+	uint8 (*getTxFifoFree)(tInterface*);            /** Function link to check if transmit FIFO is ready to be filled */
+	void (*flush)(tInterface*);                     /** Function link to flush data */
+} tSerial;
+
+/* public prototypes */
+void initCommunication(tSerial* serial);
+void linkCommunication(tProtocol* protocol, tSerial* serial);
+
 #endif
-
-#include <stdint.h>
-#include "stdbool.h"
-#include "definitions.h"
-
-typedef void (*SERIAL_SEND)( uint8_t data );
-typedef uint8_t (*SERIAL_RECEIVE)( void );
-typedef uint8_t (*SERIAL_DATA_AVAILABLE)( void );
-typedef uint8_t (*SERIAL_SEND_READY)( void );
-
-/* MISRA C-2012 8.6 deviated below. Deviation record ID - H3_MISRAC_2012_R_8_6_DR_1 */
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunknown-pragmas"
-#pragma coverity compliance block deviate:2 "MISRA C-2012 Rule 8.6" "H3_MISRAC_2012_R_8_6_DR_1"
-
-void X2CScope_Initialise(void);
-void X2CScope_HookUARTFunctions(SERIAL_SEND sendAPI, SERIAL_RECEIVE receiveAPI, \
-                                SERIAL_DATA_AVAILABLE dataAvailableAPI, SERIAL_SEND_READY sendReadyAPI );
-
-void sendSerial(uint8_t data);
-uint8_t receiveSerial(void);
-uint8_t isReceiveDataAvailable(void);
-uint8_t isSendReady(void);
-
-#pragma coverity compliance end_block "MISRA C-2012 Rule 8.6"
-#pragma GCC diagnostic pop
-/* MISRAC 2012 deviation block end */
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif	/* X2CSCOPECOMMUNICATION_H */
