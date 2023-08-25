@@ -2,6 +2,24 @@
 ![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
 
 # Microchip MPLAB® Harmony 3 Release Notes
+## X2C Release v1.4.0
+
+### New Features
+This release includes following updates for X2C Scope:
+- Modify the template files for MISRA-C Compliance.
+- Update X2C model template files for Harmony QSpin support
+ 
+### Known Issues
+None
+
+### Development Tools
+
+* [MPLAB® X IDE v6.10](https://www.microchip.com/mplab/mplab-x-ide)
+* [MPLAB® XC32 C/C++ Compiler v4.30](https://www.microchip.com/mplab/compilers)
+* [X2C v6.3] (https://x2c.lcm.at/downloads/)
+* MPLAB® X IDE plug-ins:
+    * MPLAB® Code Configurator (MCC) v5.3.7
+    * X2CScope v1.3.0 
 
 ## X2C Release v1.3.0
 
